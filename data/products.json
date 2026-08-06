@@ -1,0 +1,374 @@
+{
+  "categories": [
+    {
+      "id": "chuzos",
+      "name": "Chuzo de Pollo",
+      "emoji": "🍢",
+      "enabled": true
+    },
+    {
+      "id": "perros",
+      "name": "Perros y Perras",
+      "emoji": "🌭",
+      "enabled": true
+    },
+    {
+      "id": "arepaburguer",
+      "name": "Arepaburguer",
+      "emoji": "🫓",
+      "enabled": true
+    },
+    {
+      "id": "alas",
+      "name": "Combos de Alas",
+      "emoji": "🍗",
+      "enabled": true
+    },
+    {
+      "id": "salchipapas",
+      "name": "Salchipapas",
+      "emoji": "🍟",
+      "enabled": true
+    },
+    {
+      "id": "hamburguesas",
+      "name": "Hamburguesas",
+      "emoji": "🍔",
+      "enabled": true
+    },
+    {
+      "id": "adiciones",
+      "name": "Adiciones",
+      "emoji": "➕",
+      "enabled": true
+    },
+    {
+      "id": "bebidas",
+      "name": "Bebidas",
+      "emoji": "🥤",
+      "enabled": true
+    }
+  ],
+
+  "products": [
+    {
+      "id": "CHU001",
+      "categoryId": "chuzos",
+      "name": "Chuzo de Pollo",
+      "description": "Chuzo, arepa con queso, papas a la francesa y ensalada",
+      "price": 21000,
+      "enabled": true
+    },
+
+    {
+      "id": "PER001",
+      "categoryId": "perros",
+      "name": "Perro",
+      "description": "",
+      "price": 16000,
+      "enabled": true
+    },
+    {
+      "id": "PER002",
+      "categoryId": "perros",
+      "name": "Perro con Papas",
+      "description": "Con papas a la francesa",
+      "price": 20000,
+      "enabled": true
+    },
+    {
+      "id": "PER003",
+      "categoryId": "perros",
+      "name": "Perra",
+      "description": "",
+      "price": 19000,
+      "enabled": true
+    },
+    {
+      "id": "PER004",
+      "categoryId": "perros",
+      "name": "Perra con Papas",
+      "description": "Con papas a la francesa",
+      "price": 22000,
+      "enabled": true
+    },
+
+    {
+      "id": "ARE001",
+      "categoryId": "arepaburguer",
+      "name": "Arepaburguer Estándar",
+      "description": "",
+      "price": 16000,
+      "enabled": true
+    },
+
+    {
+      "id": "ALA001",
+      "categoryId": "alas",
+      "name": "1 Ala con Papas y Arepa",
+      "description": "",
+      "price": 12000,
+      "enabled": true
+    },
+    {
+      "id": "ALA002",
+      "categoryId": "alas",
+      "name": "2 Alas con Papas y Arepa",
+      "description": "",
+      "price": 16000,
+      "enabled": true
+    },
+    {
+      "id": "ALA003",
+      "categoryId": "alas",
+      "name": "3 Alas con Papas y Arepa",
+      "description": "",
+      "price": 20000,
+      "enabled": true
+    },
+    {
+      "id": "ALA004",
+      "categoryId": "alas",
+      "name": "1 Ala con Papas, Salchicha y Arepa",
+      "description": "",
+      "price": 14000,
+      "enabled": true
+    },
+    {
+      "id": "ALA005",
+      "categoryId": "alas",
+      "name": "2 Alas con Papas, Salchicha y Arepa",
+      "description": "",
+      "price": 18000,
+      "enabled": true
+    },
+    {
+      "id": "ALA006",
+      "categoryId": "alas",
+      "name": "3 Alas con Papas, Salchicha y Arepa",
+      "description": "",
+      "price": 22000,
+      "enabled": true
+    },
+
+    {
+      "id": "SAL001",
+      "categoryId": "salchipapas",
+      "name": "Salchipapa Sencilla",
+      "description": "Papas y salchicha",
+      "price": 12000,
+      "enabled": true
+    },
+    {
+      "id": "SAL002",
+      "categoryId": "salchipapas",
+      "name": "Personal con Carne de Hamburguesa",
+      "description": "Papas, salchicha, carne de hamburguesa y queso",
+      "price": 17000,
+      "enabled": true
+    },
+    {
+      "id": "SAL003",
+      "categoryId": "salchipapas",
+      "name": "Personal con Tocineta",
+      "description": "Papas, salchicha, tocineta y queso",
+      "price": 19000,
+      "enabled": true
+    },
+    {
+      "id": "SAL004",
+      "categoryId": "salchipapas",
+      "name": "Personal con Todo",
+      "description": "Papas, salchicha, carne de hamburguesa, tocineta y queso",
+      "price": 21000,
+      "enabled": true
+    },
+    {
+      "id": "SAL005",
+      "categoryId": "salchipapas",
+      "name": "Grande Sencilla",
+      "description": "Papas, salchicha y queso",
+      "price": 18000,
+      "enabled": true
+    },
+    {
+      "id": "SAL006",
+      "categoryId": "salchipapas",
+      "name": "Grande con Carne de Hamburguesa",
+      "description": "Papas, salchicha, carne de hamburguesa y queso",
+      "price": 22000,
+      "enabled": true
+    },
+    {
+      "id": "SAL007",
+      "categoryId": "salchipapas",
+      "name": "Grande con Tocineta",
+      "description": "Papas, salchicha, tocineta y queso",
+      "price": 23000,
+      "enabled": true
+    },
+    {
+      "id": "SAL008",
+      "categoryId": "salchipapas",
+      "name": "Grande con Todo",
+      "description": "Papas, salchicha, carne de hamburguesa, tocineta y queso",
+      "price": 30000,
+      "enabled": true
+    },
+
+    {
+      "id": "HAM001",
+      "categoryId": "hamburguesas",
+      "name": "Hamburguesa Estándar",
+      "description": "",
+      "price": 18000,
+      "enabled": true
+    },
+    {
+      "id": "HAM002",
+      "categoryId": "hamburguesas",
+      "name": "Hamburguesa Doble",
+      "description": "",
+      "price": 24000,
+      "enabled": true
+    },
+    {
+      "id": "HAM003",
+      "categoryId": "hamburguesas",
+      "name": "Hamburguesa Estándar en Combo",
+      "description": "Con papas a la francesa",
+      "price": 22000,
+      "enabled": true
+    },
+    {
+      "id": "HAM004",
+      "categoryId": "hamburguesas",
+      "name": "Hamburguesa Doble en Combo",
+      "description": "Con papas a la francesa",
+      "price": 28000,
+      "enabled": true
+    },
+
+    {
+      "id": "ADI001",
+      "categoryId": "adiciones",
+      "name": "Tocineta",
+      "description": "",
+      "price": 6000,
+      "enabled": true
+    },
+    {
+      "id": "ADI002",
+      "categoryId": "adiciones",
+      "name": "Carne de Hamburguesa",
+      "description": "",
+      "price": 6000,
+      "enabled": true
+    },
+    {
+      "id": "ADI003",
+      "categoryId": "adiciones",
+      "name": "Salchicha",
+      "description": "",
+      "price": 4000,
+      "enabled": true
+    },
+    {
+      "id": "ADI004",
+      "categoryId": "adiciones",
+      "name": "Queso",
+      "description": "",
+      "price": 5000,
+      "enabled": true
+    },
+    {
+      "id": "ADI005",
+      "categoryId": "adiciones",
+      "name": "1 Ala",
+      "description": "",
+      "price": 6000,
+      "enabled": true
+    },
+
+    {
+      "id": "BEB001",
+      "categoryId": "bebidas",
+      "name": "Coca-Cola 250 ml",
+      "description": "",
+      "price": 3000,
+      "enabled": true
+    },
+    {
+      "id": "BEB002",
+      "categoryId": "bebidas",
+      "name": "Postobón 250 ml",
+      "description": "",
+      "price": 2500,
+      "enabled": true
+    },
+    {
+      "id": "BEB003",
+      "categoryId": "bebidas",
+      "name": "Coca-Cola 350 ml",
+      "description": "",
+      "price": 4000,
+      "enabled": true
+    },
+    {
+      "id": "BEB004",
+      "categoryId": "bebidas",
+      "name": "Postobón 350 ml",
+      "description": "",
+      "price": 3500,
+      "enabled": true
+    },
+    {
+      "id": "BEB005",
+      "categoryId": "bebidas",
+      "name": "Hit 400 ml",
+      "description": "",
+      "price": 4000,
+      "enabled": true
+    },
+    {
+      "id": "BEB006",
+      "categoryId": "bebidas",
+      "name": "H2O 600 ml",
+      "description": "",
+      "price": 4000,
+      "enabled": true
+    },
+    {
+      "id": "BEB007",
+      "categoryId": "bebidas",
+      "name": "Coca-Cola 1.5 L",
+      "description": "",
+      "price": 8000,
+      "enabled": true
+    },
+    {
+      "id": "BEB008",
+      "categoryId": "bebidas",
+      "name": "Postobón 1.5 L",
+      "description": "",
+      "price": 7000,
+      "enabled": true
+    },
+    {
+      "id": "BEB009",
+      "categoryId": "bebidas",
+      "name": "Hit 1 L",
+      "description": "",
+      "price": 7000,
+      "enabled": true
+    },
+    {
+      "id": "BEB010",
+      "categoryId": "bebidas",
+      "name": "Agua",
+      "description": "",
+      "price": 2000,
+      "enabled": true
+    }
+  ]
+}

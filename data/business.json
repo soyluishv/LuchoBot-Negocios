@@ -1,0 +1,74 @@
+{
+  "business": {
+    "id": "rapicros-alita",
+    "name": "Rapicros Alita",
+    "type": "comidas_rapidas",
+
+    "contact": {
+      "whatsapp": "573046578264"
+    },
+
+    "location": {
+      "address": "Calle 132 A Sur #47-09, La Playita",
+      "city": "Caldas",
+      "department": "Antioquia",
+      "country": "Colombia"
+    },
+
+    "branding": {
+      "logo": "media/logo/logo.jpg"
+    },
+
+    "schedule": {
+      "regular": {
+        "days": [
+          "martes",
+          "miercoles",
+          "jueves",
+          "viernes",
+          "sabado",
+          "domingo"
+        ],
+        "opensAt": "17:00",
+        "closesAt": "00:00"
+      },
+
+      "holidayMonday": {
+        "enabled": true,
+        "opensAt": "17:00",
+        "closesAt": "00:00",
+        "restDayAfterHoliday": "martes"
+      }
+    },
+
+    "orders": {
+      "enabled": true,
+      "estimatedPreparationMinutes": 30
+    },
+
+    "delivery": {
+      "enabled": true,
+      "priceType": "fixed",
+      "fixedPrice": 3000,
+      "currency": "COP"
+    },
+
+    "pickup": {
+      "enabled": true
+    },
+
+    "payments": {
+      "online": {
+        "enabled": false
+      },
+
+      "payAtStore": {
+        "enabled": true
+      },
+
+      "cashOnDelivery": {
+        "enabled": true
+      }
+    }
+  }
+}
