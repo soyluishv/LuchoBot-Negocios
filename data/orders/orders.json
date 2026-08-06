@@ -1,0 +1,63 @@
+{
+  "lastOrderNumber": 2,
+  "orders": [
+    {
+      "orderNumber": "0001",
+      "userId": "cliente-persistencia",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "HAM001",
+          "name": "Hamburguesa Estándar",
+          "unitPrice": 18000,
+          "quantity": 2,
+          "total": 36000
+        }
+      ],
+      "subtotal": 36000,
+      "delivery": {
+        "type": "delivery",
+        "price": 3000
+      },
+      "customer": {
+        "name": "Cliente Prueba",
+        "phone": "3001234567",
+        "address": "Dirección de prueba",
+        "neighborhood": "La Playita",
+        "notes": ""
+      },
+      "paymentMethod": "cash_on_delivery",
+      "total": 39000,
+      "createdAt": 1786057434939
+    },
+    {
+      "orderNumber": "0002",
+      "userId": "cliente-persistencia",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "HAM001",
+          "name": "Hamburguesa Estándar",
+          "unitPrice": 18000,
+          "quantity": 2,
+          "total": 36000
+        }
+      ],
+      "subtotal": 36000,
+      "delivery": {
+        "type": "delivery",
+        "price": 3000
+      },
+      "customer": {
+        "name": "Cliente Prueba",
+        "phone": "3001234567",
+        "address": "Dirección de prueba",
+        "neighborhood": "La Playita",
+        "notes": ""
+      },
+      "paymentMethod": "cash_on_delivery",
+      "total": 39000,
+      "createdAt": 1786057475733
+    }
+  ]
+}
