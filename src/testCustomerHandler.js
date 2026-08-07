@@ -27,6 +27,42 @@ console.log("\n======================================");
 console.log(
     customerHandler.processCustomerMessage(
         "cliente-1",
+        "6"
+    )
+);
+
+console.log("\n======================================");
+
+console.log(
+    customerHandler.processCustomerMessage(
+        "cliente-1",
+        "2"
+    )
+);
+
+console.log("\n======================================");
+
+console.log(
+    customerHandler.processCustomerMessage(
+        "cliente-1",
         "0"
+    )
+);
+
+console.log("\n======================================");
+
+console.log(
+    customerHandler.processCustomerMessage(
+        "cliente-1",
+        "0"
+    )
+);
+
+console.log("\n======================================");
+
+console.log(
+    customerHandler.processCustomerMessage(
+        "cliente-1",
+        "2"
     )
 );
