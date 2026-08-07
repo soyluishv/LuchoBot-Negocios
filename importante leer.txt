@@ -5,3 +5,16 @@ products.json
 logo
 
 sin tocar la lógica principal. 🍔🤖💰
+
+📈 Si miramos el proyecto como producto, ya no es un simple bot. Ya tienes:
+
+🍔 Catálogo completo
+🛒 Carrito editable
+💰 Cálculo de totales
+🛵 Domicilio
+👤 Datos del cliente
+🧾 Resumen de compra
+📦 Generación de pedidos
+💾 Persistencia en disco
+📊 Reportes
+👨‍💼 Administración de pedidos
