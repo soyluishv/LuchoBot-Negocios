@@ -1,0 +1,7 @@
+Lo que tienes ahora es la base de un sistema de pedidos para restaurantes, que después podrás vender a otros negocios cambiando únicamente:
+
+business.json
+products.json
+logo
+
+sin tocar la lógica principal. 🍔🤖💰

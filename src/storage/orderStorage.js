@@ -174,6 +174,41 @@ function findOrder(orderNumber) {
 }
 
 // ==========================================
+// ACTUALIZAR PEDIDO
+// ==========================================
+
+function updateOrder(orderNumber, updatedFields) {
+
+    const data = readData();
+
+    const index = data.orders.findIndex(
+        order =>
+            order.orderNumber === orderNumber
+    );
+
+    if (index === -1) {
+
+        return null;
+
+    }
+
+    data.orders[index] = {
+
+        ...data.orders[index],
+
+        ...updatedFields,
+
+        updatedAt: Date.now()
+
+    };
+
+    writeData(data);
+
+    return data.orders[index];
+
+}
+
+// ==========================================
 // OBTENER TODOS
 // ==========================================
 
@@ -205,6 +240,7 @@ module.exports = {
     getNextOrderNumber,
     saveOrder,
     findOrder,
+    updateOrder,
     getAllOrders,
     getOrdersByUser
 
