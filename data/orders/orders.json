@@ -4,7 +4,7 @@
     {
       "orderNumber": "0001",
       "userId": "cliente-persistencia",
-      "status": "preparing",
+      "status": "on_the_way",
       "items": [
         {
           "productId": "HAM001",
@@ -29,12 +29,12 @@
       "paymentMethod": "cash_on_delivery",
       "total": 39000,
       "createdAt": 1786057434939,
-      "updatedAt": 1786060833008
+      "updatedAt": 1786061647304
     },
     {
       "orderNumber": "0002",
       "userId": "cliente-persistencia",
-      "status": "confirmed",
+      "status": "delivered",
       "items": [
         {
           "productId": "HAM001",
@@ -58,7 +58,8 @@
       },
       "paymentMethod": "cash_on_delivery",
       "total": 39000,
-      "createdAt": 1786057475733
+      "createdAt": 1786057475733,
+      "updatedAt": 1786061647313
     }
   ]
 }
