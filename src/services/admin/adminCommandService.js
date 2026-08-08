@@ -84,6 +84,10 @@ function processAdminCommand(message) {
 
         success: true,
 
+        order,
+
+        status: newStatus,
+
         message:
             `✅ Pedido #${orderNumber} actualizado a ${newStatus}.`
 

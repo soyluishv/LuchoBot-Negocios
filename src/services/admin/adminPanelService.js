@@ -1,3 +1,8 @@
+const {
+    getStatusLabel
+} = require(
+    "../order/orderStatus"
+);
 const adminCommandService = require(
     "./adminCommandService"
 );
@@ -28,26 +33,68 @@ function processAdminMessage(message) {
             pendingOrders.length === 0
         ) {
 
-            return "✅ No hay pedidos pendientes.";
+            return {
+                success: true,
+                message:
+                    "✅ No hay pedidos pendientes."
+            };
 
         }
 
         let response =
             "📦 PEDIDOS PENDIENTES\n\n";
 
-        pendingOrders.forEach(
-            order => {
+            pendingOrders.forEach(
+                order => {
 
-                response +=
-                    `#${order.orderNumber} | ${order.status} | $${order.total.toLocaleString("es-CO")}\n`;
+            const waitingMinutes =
+            Math.floor(
+            (Date.now() - order.createdAt) /
+            60000
+            );
 
-            }
-        );
+let waitingIndicator =
+    "🟢";
+
+if (waitingMinutes >= 60) {
+
+    waitingIndicator = "🔴";
+
+}
+else if (waitingMinutes >= 30) {
+
+    waitingIndicator = "🟡";
+
+}
+
+    const products =
+        order.items
+        .map(
+            item =>
+                `${item.quantity}x ${item.name}`
+        )
+        .join("\n");
+
+        response +=
+           `📦 #${order.orderNumber}\n` +
+           `👤 ${order.customer.name}\n` +
+           `🍔 Productos:\n${products}\n\n` +
+            `📌 ${getStatusLabel(order.status)}\n` +
+            `⏱️ ${waitingMinutes} min | ${waitingIndicator}\n` +
+            `🚚 ${order.delivery.type === "pickup" ? "Recoger en punto" : "Domicilio"}\n` +
+            `💰 $${order.total.toLocaleString("es-CO")}\n` +
+            `━━━━━━━━━━━━━━━━\n\n`;
+
+              }
+             );
 
         response +=
             `\nTotal pendientes: ${pendingOrders.length}`;
 
-        return response;
+        return {
+            success: true,
+            message: response
+        };
 
     }
 
@@ -57,13 +104,18 @@ function processAdminMessage(message) {
             adminReportService
                 .getSalesReport();
 
-        return (
-            "📊 REPORTE GENERAL\n\n" +
-            `Pedidos: ${report.totalOrders}\n` +
-            `Ventas: $${report.totalSales.toLocaleString("es-CO")}\n` +
-            `Entregados: ${report.delivered}\n` +
-            `Pendientes: ${report.pending}`
-        );
+        return {
+
+            success: true,
+
+            message:
+                "📊 REPORTE GENERAL\n\n" +
+                `Pedidos: ${report.totalOrders}\n` +
+                `Ventas: $${report.totalSales.toLocaleString("es-CO")}\n` +
+                `Entregados: ${report.delivered}\n` +
+                `Pendientes: ${report.pending}`
+
+        };
 
     }
 
@@ -87,16 +139,46 @@ function processAdminMessage(message) {
 
         if (!order) {
 
-            return `❌ Pedido #${orderNumber} no encontrado.`;
+            return {
+
+                success: false,
+
+                message:
+                    `❌ Pedido #${orderNumber} no encontrado.`
+
+            };
 
         }
 
-        return (
+let products = "";
+
+order.items.forEach(
+    item => {
+
+        products +=
+            `${item.quantity}x ${item.name}\n`;
+
+    }
+    );
+
+            return {
+
+            success: true,
+
+            order,
+
+            message:
             `📦 PEDIDO #${order.orderNumber}\n\n` +
-            `Estado: ${order.status}\n` +
-            `Cliente: ${order.customer.name}\n` +
-            `Total: $${order.total.toLocaleString("es-CO")}`
-        );
+            `👤 Cliente: ${order.customer.name}\n` +
+            `📱 Teléfono: ${order.customer.phone}\n` +
+            `🚚 ${order.delivery.type === "pickup"
+            ? "Recoger en punto"
+            : "Domicilio"}\n\n` +
+            `🛒 Productos:\n${products}\n` +
+            `💰 Total: $${order.total.toLocaleString("es-CO")}\n\n` +
+            `📌 Estado: ${order.status}`
+
+    };
 
     }
 
@@ -104,13 +186,10 @@ function processAdminMessage(message) {
     // COMANDOS
     // ==========================
 
-    const result =
-        adminCommandService
-            .processAdminCommand(
-                upperText
-            );
-
-    return result.message;
+    return adminCommandService
+        .processAdminCommand(
+            upperText
+        );
 
 }
 

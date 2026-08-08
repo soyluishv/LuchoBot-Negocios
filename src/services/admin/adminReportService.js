@@ -14,14 +14,21 @@ const {
 
 function getPendingOrders() {
 
-    const orders =
+const orders =
         orderStorage.getAllOrders();
 
-    return orders.filter(
-        order =>
-            order.status !== "delivered" &&
-            order.status !== "cancelled"
-    );
+     return orders
+
+        .filter(
+            order =>
+                order.status !== "delivered" &&
+                order.status !== "cancelled"
+        )
+
+        .sort(
+            (a, b) =>
+                a.createdAt - b.createdAt
+        );
 
 }
 

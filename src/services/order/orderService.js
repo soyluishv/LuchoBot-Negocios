@@ -18,13 +18,9 @@ const customerDataService = require(
     "../checkout/customerDataService"
 );
 
-// ==========================================
-// PEDIDOS CONFIRMADOS
-// ==========================================
-
-const orders = new Map();
-
-let orderSequence = 0;
+const orderStorage = require(
+    "../../storage/orderStorage"
+);
 
 // ==========================================
 // GENERAR NÚMERO DE PEDIDO
@@ -32,10 +28,7 @@ let orderSequence = 0;
 
 function generateOrderNumber() {
 
-    orderSequence++;
-
-    return String(orderSequence)
-        .padStart(4, "0");
+    return orderStorage.getNextOrderNumber();
 
 }
 
@@ -151,10 +144,9 @@ function confirmOrder(userId) {
     // GUARDAR PEDIDO
     // ======================================
 
-    orders.set(
-        order.orderNumber,
-        order
-    );
+    orderStorage.saveOrder(
+    order
+);
 
     // ======================================
     // LIMPIAR PROCESO TEMPORAL
@@ -177,7 +169,9 @@ function confirmOrder(userId) {
 
 function getOrder(orderNumber) {
 
-    return orders.get(orderNumber) || null;
+    return orderStorage.findOrder(
+        orderNumber
+    );
 
 }
 
@@ -187,9 +181,7 @@ function getOrder(orderNumber) {
 
 function getOrders() {
 
-    return Array.from(
-        orders.values()
-    );
+    return orderStorage.getAllOrders();
 
 }
 

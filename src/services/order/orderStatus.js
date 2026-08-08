@@ -23,19 +23,19 @@ function getStatusLabel(status) {
     switch (status) {
 
         case STATUS.CONFIRMED:
-            return "Confirmado";
+            return "🆕 Confirmado";
 
         case STATUS.PREPARING:
-            return "En preparación";
+            return "👨‍🍳 En preparación";
 
         case STATUS.ON_THE_WAY:
-            return "En camino";
+            return "🛵 En camino";
 
         case STATUS.DELIVERED:
-            return "Entregado";
+            return "✅ Entregado";
 
         case STATUS.CANCELLED:
-            return "Cancelado";
+            return "❌ Cancelado";
 
         default:
             return "Desconocido";

@@ -14,6 +14,30 @@ const sessionStorage = require(
     "../../storage/sessionStorage"
 );
 
+const customerDataService = require(
+    "../../services/checkout/customerDataService"
+);
+const {
+    handleMainMenu
+} = require(
+    "../main/mainMenuHandler"
+);
+const {
+    handleCategories
+} = require(
+    "../catalog/categoryHandler"
+);
+const {
+    handleProducts
+} = require(
+    "../catalog/productHandler"
+);
+const {
+    handleCheckout
+} = require(
+    "../checkout/checkoutHandler"
+);
+
 // ==========================================
 // MENÚ DE CATEGORÍAS
 // ==========================================
@@ -94,129 +118,38 @@ function processCustomerMessage(
     const text =
         message.trim();
 
-    // ======================================
-    // MENÚ PRINCIPAL
-    // ======================================
+// ======================================
+// MENÚ PRINCIPAL
+// ======================================
 
 if (
     session.state === "MAIN_MENU"
 ) {
 
-    if (
-        text === "1"
-    ) {
-
-        sessionStorage.updateSession(
-            userId,
-            {
-                state:
-                    "VIEWING_CATEGORIES"
-            }
-        );
-
-        return buildCategoriesMenu();
-
-    }
-
-    if (
-        text === "2"
-    ) {
-
-        const cart =
-            cartService.getCart(
-                userId
-            );
-
-        const subtotal =
-            cartService.getSubtotal(
-                userId
-            );
-
-        return cartTemplate.formatCart(
-            cart,
-            subtotal
-        );
-
-    }
-
-    return (
-        "🍔 Bienvenido a Rapicros Alita\n\n" +
-        "1️⃣ Ver menú\n" +
-        "2️⃣ Ver carrito\n" +
-        "3️⃣ Finalizar pedido\n\n" +
-        "0️⃣ Cancelar"
+    return handleMainMenu(
+        userId,
+        text,
+        buildCategoriesMenu
     );
 
 }
-
-    // ======================================
-    // VIENDO CATEGORÍAS
-    // ======================================
-
-    if (
-        session.state ===
-        "VIEWING_CATEGORIES"
-    ) {
-
-        if (
-            text === "0"
-        ) {
-
-            sessionStorage.updateSession(
-                userId,
-                {
-                    state:
-                        "MAIN_MENU"
-                }
-            );
-
-            return (
-                "🍔 Menú principal\n\n" +
-                "1️⃣ Ver menú\n" +
-                "2️⃣ Ver carrito\n" +
-                "3️⃣ Finalizar pedido"
-            );
-
-        }
-
-const categories =
-    catalogService.getActiveCategories();
-
-const selectedIndex =
-    parseInt(text, 10) - 1;
+// ======================================
+// VIENDO CATEGORÍAS
+// ======================================
 
 if (
-    selectedIndex >= 0 &&
-    selectedIndex < categories.length
+    session.state ===
+    "VIEWING_CATEGORIES"
 ) {
 
-    const category =
-        categories[selectedIndex];
-
-    sessionStorage.updateSession(
+    return handleCategories(
         userId,
-        {
-            state:
-                "VIEWING_PRODUCTS",
-
-            data: {
-                categoryId:
-                    category.id
-            }
-        }
-    );
-
-    return buildProductsMenu(
-        category.id
+        text,
+        buildProductsMenu
     );
 
 }
 
-return (
-    "📋 Selecciona una categoría válida."
-);
-
-    }
 // ======================================
 // VIENDO PRODUCTOS
 // ======================================
@@ -226,60 +159,47 @@ if (
     "VIEWING_PRODUCTS"
 ) {
 
-    if (
-        text === "0"
-    ) {
-
-        sessionStorage.updateSession(
-            userId,
-            {
-                state:
-                    "VIEWING_CATEGORIES"
-            }
-        );
-
-        return buildCategoriesMenu();
-
-    }
-
-    const products =
-        catalogService.getProductsByCategory(
-            session.data.categoryId
-        );
-
-    const selectedIndex =
-        parseInt(text, 10) - 1;
-
-    if (
-        selectedIndex >= 0 &&
-        selectedIndex < products.length
-    ) {
-
-        const product =
-            products[selectedIndex];
-
-        cartService.addProduct(
-            userId,
-            product.id,
-            1
-        );
-
-        return (
-            "✅ Producto agregado al carrito\n\n" +
-            `🍔 ${product.name}\n` +
-            `💰 $${product.price.toLocaleString("es-CO")}\n\n` +
-            "Puedes seguir agregando productos o escribir 0 para volver."
-        );
-
-    }
-
-    return (
-        "🍔 Selecciona un producto válido."
+    return handleProducts(
+        userId,
+        text,
+        session,
+        buildCategoriesMenu,
+        buildProductsMenu
     );
 
 }
 
-    return "❌ Estado no reconocido.";
+if (
+    session.state ===
+    "PRODUCT_ADDED"
+) {
+
+    return handleProducts(
+        userId,
+        text,
+        session,
+        buildCategoriesMenu,
+        buildProductsMenu
+    );
+
+}
+
+const checkoutResponse =
+handleCheckout(
+    userId,
+    text,
+    session
+);
+
+if (
+    checkoutResponse
+) {
+
+    return checkoutResponse;
+
+}
+
+return "❌ Estado no reconocido.";
 
 }
 
