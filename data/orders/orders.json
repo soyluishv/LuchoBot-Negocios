@@ -1,5 +1,5 @@
 {
-  "lastOrderNumber": 12,
+  "lastOrderNumber": 14,
   "orders": [
     {
       "orderNumber": "0001",
@@ -415,6 +415,64 @@
       "paymentMethod": "pay_at_store",
       "total": 33000,
       "createdAt": 1786168866130
+    },
+    {
+      "orderNumber": "0013",
+      "userId": "154305692741845@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "HAM001",
+          "name": "Hamburguesa Estándar",
+          "unitPrice": 18000,
+          "quantity": 1,
+          "total": 18000
+        }
+      ],
+      "subtotal": 18000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "laura",
+        "phone": "3116399991",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 18000,
+      "createdAt": 1786207052024
+    },
+    {
+      "orderNumber": "0014",
+      "userId": "154305692741845@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "BEB001",
+          "name": "Coca-Cola 250 ml",
+          "unitPrice": 3000,
+          "quantity": 1,
+          "total": 3000
+        }
+      ],
+      "subtotal": 3000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "estela",
+        "phone": "316000000",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 3000,
+      "createdAt": 1786213454885
     }
   ]
 }

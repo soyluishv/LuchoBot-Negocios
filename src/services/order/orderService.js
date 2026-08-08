@@ -22,6 +22,10 @@ const orderStorage = require(
     "../../storage/orderStorage"
 );
 
+const adminNotificationService = require(
+    "../whatsapp/adminNotificationService"
+);
+
 // ==========================================
 // GENERAR NÚMERO DE PEDIDO
 // ==========================================
@@ -146,6 +150,28 @@ function confirmOrder(userId) {
 
     orderStorage.saveOrder(
     order
+);
+
+const adminNotification =
+    adminNotificationService
+        .buildNewOrderNotification(
+            order
+        );
+
+console.log(
+    "\n===================="
+);
+
+console.log(
+    "NUEVO PEDIDO"
+);
+
+console.log(
+    adminNotification
+);
+
+console.log(
+    "====================\n"
 );
 
     // ======================================

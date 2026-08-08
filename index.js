@@ -1,6 +1,13 @@
-console.log(
-    "🚨 INDEX NUEVO CARGADO"
-);
+console.clear();
+
+console.log(`
+╔══════════════════════════════╗
+║   🤖 LuchoBot Negocios       ║
+║        Versión 1.0           ║
+╚══════════════════════════════╝
+`);
+
+console.log("🚀 Iniciando WhatsApp...");
 
 const wppconnect = require(
     "@wppconnect-team/wppconnect"
@@ -23,7 +30,11 @@ wppconnect.create({
 
     useChrome: true,
 
-    debug: false
+    debug: false,
+
+    logQR: false,
+
+    disableWelcome: true
 })
 
 .then(async (client) => {
@@ -36,8 +47,10 @@ wppconnect.create({
         async (message) => {
 
             if (
+               !message.from ||
                 message.isGroupMsg ||
-                message.from === "status@broadcast"
+                message.from === "status@broadcast" ||
+                message.from.endsWith("@newsletter")
             ) {
                 return;
             }
