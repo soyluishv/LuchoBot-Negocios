@@ -24,13 +24,32 @@ function handleCategories(
             }
         );
 
-        return (
-            "🍔 Menú principal\n\n" +
-            "1️⃣ Ver menú\n" +
-            "2️⃣ Ver carrito\n" +
-            "3️⃣ Finalizar pedido\n\n" +
-            "0️⃣ Cancelar"
-        );
+return (
+    "🔥🍔 *RAPI CROCK'S* 🍔🔥\n\n" +
+
+    "━━━━━━━━━━━━━━━━━━\n\n" +
+
+    "😋 *¡Bienvenido!*\n\n" +
+
+    "🌭 Perros Calientes\n" +
+    "🍔 Hamburguesas\n" +
+    "🍟 Papas\n" +
+    "🥤 Bebidas\n\n" +
+
+    "━━━━━━━━━━━━━━━━━━\n\n" +
+
+    "1️⃣ 🍔 Ver Menú\n\n" +
+
+    "2️⃣ 🛒 Ver Carrito\n\n" +
+
+    "3️⃣ ✅ Finalizar Pedido\n\n" +
+
+    "━━━━━━━━━━━━━━━━━━\n\n" +
+
+    "0️⃣ ❌ Cancelar\n\n" +
+
+    "👇 Responde con una opción"
+);
 
     }
 

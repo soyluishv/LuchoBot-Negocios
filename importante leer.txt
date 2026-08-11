@@ -1,20 +1,34 @@
-Lo que tienes ahora es la base de un sistema de pedidos para restaurantes, que después podrás vender a otros negocios cambiando únicamente:
+Lo que tienes ahora es la base de un sistema de pedidos para restaurantes, que después podrás vender a otros negocios cambiando únicamente:   node index.js CON ESTE COMANDO LO EJECUTO
 
-business.json
-products.json
-logo
+Ahora mismo el flujo es rápido:
 
-sin tocar la lógica principal. 🍔🤖💰
+📲 Cliente hace pedido.
+🔔 Te llega automáticamente al WhatsApp administrador.
+📦 Sale el número del pedido.
+✅ Ya te muestra OK 0010.
+❌ Ya te muestra CANCELAR 0010.
+📚 Los entregados pasan a HISTORIAL.
+📦 Los pendientes siguen en cola por orden de llegada.
+👤 El cliente recibe notificación cuando entregas o cancelas.
 
-📈 Si miramos el proyecto como producto, ya no es un simple bot. Ya tienes:
+Tu mensaje de nuevo pedido quedará así:
 
-🍔 Catálogo completo
-🛒 Carrito editable
-💰 Cálculo de totales
-🛵 Domicilio
-👤 Datos del cliente
-🧾 Resumen de compra
-📦 Generación de pedidos
-💾 Persistencia en disco
-📊 Reportes
-👨‍💼 Administración de pedidos
+🔔 NUEVO PEDIDO
+
+📦 Pedido #0010
+
+👤 perro
+📱 314865448
+
+🍔 Productos
+
+1x Hamburguesa Estándar
+
+💰 Total: $18.000
+
+🚚 Recoger en punto
+
+⏱️ Recién recibido
+
+✅ OK 0010
+❌ CANCELAR 0010

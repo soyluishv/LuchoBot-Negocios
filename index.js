@@ -38,7 +38,7 @@ wppconnect.create({
 })
 
 .then(async (client) => {
-
+    global.whatsappClient = client;
     console.log(
         "✅ WhatsApp conectado"
     );
@@ -94,15 +94,15 @@ wppconnect.create({
                     "ADMIN DETECTADO"
                 );
 
-                const adminCommands = [
-                "PENDIENTES",
-                "VENTAS",
-                "BUSCAR",
-                "PREPARAR",
-                "ENCAMINO",
-                "ENTREGADO",
-                "CANCELAR"
-                ];
+const adminCommands = [
+    "PENDIENTES",
+    "VENTAS",
+    "HISTORIAL",
+    "BUSCAR",
+    "OK",
+    "CANCELAR",
+    "AYUDA"
+];
 
                 const adminText =
                     message.body

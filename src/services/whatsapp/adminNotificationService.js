@@ -1,3 +1,6 @@
+const orderStorage = require(
+    "../../storage/orderStorage"
+);
 function buildNewOrderNotification(order) {
 
     let message =
@@ -13,26 +16,71 @@ function buildNewOrderNotification(order) {
         `📱 ${order.customer.phone}\n\n`;
 
     message +=
-        "🛒 Pedido\n\n";
+        "🍔 Productos\n\n";
 
     order.items.forEach(
         item => {
 
             message +=
-                `${item.quantity}x ${item.name}\n`;
+    `${item.quantity}x [${item.categoryName}] ${item.name}\n`;
 
         }
     );
 
     message +=
-        `\n💰 Total: $${order.total.toLocaleString("es-CO")}\n`;
+        `\n💰 Total: $${order.total.toLocaleString("es-CO")}\n\n`;
 
     message +=
-        `📍 ${order.delivery.type === "pickup"
-            ? "Recoger en punto"
-            : "Domicilio"}\n`;
+        `🚚 ${
+            order.delivery.type === "pickup"
+                ? "Recoger en punto"
+                : "Domicilio"
+        }\n`;
 
-    return message;
+    if (
+        order.delivery.type === "delivery"
+    ) {
+
+        message +=
+            `📍 ${order.customer.address}\n`;
+
+        message +=
+            `🏘️ ${order.customer.neighborhood}\n`;
+
+    }
+
+if (
+order.customer.notes &&
+order.customer.notes !== "SIN OBSERVACIONES"
+) {
+
+    message +=
+        `📝 ${order.customer.notes}\n`;
+
+}
+
+const pendingCount =
+    orderStorage
+        .getAllOrders()
+        .filter(
+            order =>
+                order.status !== "delivered" &&
+                order.status !== "cancelled"
+        ).length;
+
+message +=
+    "\n⏱️ Recién recibido\n";
+
+message +=
+    `📦 Pendientes en cola: ${pendingCount}\n\n`;
+
+message +=
+    `✅ OK ${order.orderNumber}\n`;
+
+message +=
+    `❌ CANCELAR ${order.orderNumber}`;
+
+return message;
 
 }
 

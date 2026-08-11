@@ -108,41 +108,44 @@ function confirmOrder(userId) {
     // CREAR SNAPSHOT DEL PEDIDO
     // ======================================
 
-    const order = {
+const order = {
 
-        orderNumber: generateOrderNumber(),
+    orderNumber: generateOrderNumber(),
 
-        userId,
+    userId,
 
-        status: "confirmed",
+    status: "confirmed",
 
-        items: cart.items.map(item => ({
-            productId: item.productId,
-            name: item.name,
-            unitPrice: item.unitPrice,
-            quantity: item.quantity,
-            total:
-                item.unitPrice * item.quantity
-        })),
+    items: cart.items.map(item => ({
+        productId: item.productId,
+        categoryId: item.categoryId,
+        categoryName: item.categoryName,
+        emoji: item.emoji,
+        name: item.name,
+        unitPrice: item.unitPrice,
+        quantity: item.quantity,
+        total:
+            item.unitPrice * item.quantity
+    })),
 
-        subtotal,
+    subtotal,
 
-        delivery: {
-            type: checkout.deliveryType,
-            price: checkout.deliveryPrice
-        },
+    delivery: {
+        type: checkout.deliveryType,
+        price: checkout.deliveryPrice
+    },
 
-        customer: {
-            ...checkout.customer
-        },
+    customer: {
+        ...checkout.customer
+    },
 
-        paymentMethod:
-            checkout.paymentMethod,
+    paymentMethod:
+        checkout.paymentMethod,
 
-        total,
+    total,
 
-        createdAt: Date.now()
-    };
+    createdAt: Date.now()
+};
 
     // ======================================
     // GUARDAR PEDIDO
@@ -157,6 +160,17 @@ const adminNotification =
         .buildNewOrderNotification(
             order
         );
+
+if (
+    global.whatsappClient
+) {
+
+    global.whatsappClient.sendText(
+        "11222867038253@lid",
+        adminNotification
+    );
+
+}
 
 console.log(
     "\n===================="

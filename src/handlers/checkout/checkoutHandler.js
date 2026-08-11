@@ -146,9 +146,24 @@ if (
     "ASK_PHONE"
 ) {
 
+    const phone =
+        text.trim();
+
+    if (
+        !/^3\d{9}$/.test(phone)
+    ) {
+
+        return (
+            "❌ Número de celular inválido.\n\n" +
+            "Debe comenzar por 3 y tener exactamente 10 dígitos.\n\n" +
+            "Ejemplo: 3046578264"
+        );
+
+    }
+
     customerDataService.setPhone(
         userId,
-        text
+        phone
     );
 
     const checkout =
@@ -172,54 +187,16 @@ if (
             "RECOGE EN PUNTO"
         );
 
-        customerDataService.setNotes(
-            userId,
-            "SIN OBSERVACIONES"
-        );
-
-        const result =
-            orderService.confirmOrder(
-                userId
-            );
-
-        if (!result.ok) {
-
-            return (
-                "❌ Error al registrar el pedido.\n\n" +
-                result.message
-            );
-
-        }
-
         sessionStorage.updateSession(
             userId,
             {
-                state: "MAIN_MENU"
+                state: "ASK_NOTES_PICKUP"
             }
         );
 
-                let orderSummary =
-                    "🛒 Resumen del pedido\n\n";
-
-                result.order.items.forEach(
-                    item => {
-
-                        orderSummary +=
-                            `${item.quantity}x ${item.name}\n`;
-
-                        }
-                    );
-
-                    orderSummary += "\n";
-
-                        return (
-                        "✅ Pedido registrado correctamente\n\n" +
-                        `📦 Pedido #${result.order.orderNumber}\n\n` +
-                            orderSummary +
-                        `💰 Total: $${result.order.total.toLocaleString("es-CO")}\n\n` +
-                        "📍 Recoger en punto\n\n" +
-                        "Tu pedido quedará listo para recoger."
-                    );
+        return (
+            "📝 Observaciones del pedido (o escribe NO):"
+        );
 
     }
 
@@ -234,34 +211,35 @@ if (
         "📍 Escribe tu dirección:"
     );
 
-     }
+}
 
     // ======================================
     // PEDIR BARRIO
     // ======================================
 
-    if (
-        session.state ===
-        "ASK_NEIGHBORHOOD"
-    ) {
+if (
+    session.state ===
+    "ASK_NEIGHBORHOOD"
+) {
 
-        customerDataService.setNeighborhood(
-            userId,
-            text
-        );
+    customerDataService.setNeighborhood(
+        userId,
+        text
+    );
 
-        sessionStorage.updateSession(
-            userId,
-            {
-                state: "ASK_NOTES"
-            }
-        );
+    sessionStorage.updateSession(
+        userId,
+        {
+            state: "ASK_NOTES"
+        }
+    );
 
-        return (
-            "📝 Observaciones del pedido (o escribe NO):"
-        );
+    return (
+        "📝 Observaciones del pedido (o escribe NO):"
+    );
 
-    }
+}
+
 // ======================================
 // PEDIR OBSERVACIONES
 // ======================================
@@ -273,7 +251,9 @@ if (
 
     customerDataService.setNotes(
         userId,
-        text
+        text.toUpperCase() === "NO"
+            ? "SIN OBSERVACIONES"
+            : text
     );
 
     const result =
@@ -297,28 +277,120 @@ if (
         }
     );
 
-let orderSummary =
-    "🛒 Resumen del pedido\n\n";
+    let orderSummary =
+        "🛒 Resumen del pedido\n\n";
 
-result.order.items.forEach(
-    item => {
+    result.order.items.forEach(
+        item => {
 
-        orderSummary +=
-            `${item.quantity}x ${item.name}\n`;
+            orderSummary +=
+                `${item.quantity}x [${item.categoryName}] ${item.name}\n`;
+
+        }
+    );
+
+    orderSummary += "\n";
+
+    let notesText = "";
+
+    if (
+        result.order.customer &&
+        result.order.customer.notes &&
+        result.order.customer.notes !==
+        "SIN OBSERVACIONES"
+    ) {
+
+        notesText =
+            `📝 Observaciones: ${result.order.customer.notes}\n\n`;
 
     }
-);
 
-orderSummary += "\n";
+    return (
+        "✅ Pedido registrado correctamente\n\n" +
+        `📦 Pedido #${result.order.orderNumber}\n\n` +
+        orderSummary +
+        `💰 Total: $${result.order.total.toLocaleString("es-CO")}\n\n` +
+        notesText +
+        "🚚 Domicilio\n\n" +
+        "Muy pronto uno de nuestros asesores te contactará."
+    );
+
+}
+
+// ======================================
+// OBSERVACIONES RECOGER EN PUNTO
+// ======================================
+
+
+if (
+    session.state ===
+    "ASK_NOTES_PICKUP"
+) {
+
+customerDataService.setNotes(
+    userId,
+    text.trim().toUpperCase() === "NO"
+        ? "SIN OBSERVACIONES"
+        : text
+);
+    const result =
+        orderService.confirmOrder(
+            userId
+        );
+
+    if (!result.ok) {
 
         return (
-            "✅ Pedido registrado correctamente\n\n" +
-            `📦 Pedido #${result.order.orderNumber}\n\n` +
-            orderSummary +
-            `💰 Total: $${result.order.total.toLocaleString("es-CO")}\n\n` +
-            "🚚 Domicilio\n\n" +
-            "Muy pronto uno de nuestros asesores te contactará."
+            "❌ Error al registrar el pedido.\n\n" +
+            result.message
         );
+
+    }
+
+    sessionStorage.updateSession(
+        userId,
+        {
+            state: "MAIN_MENU"
+        }
+    );
+
+    let orderSummary =
+        "🛒 Resumen del pedido\n\n";
+
+    result.order.items.forEach(
+        item => {
+
+            orderSummary +=
+                `${item.quantity}x [${item.categoryName}] ${item.name}\n`;
+
+        }
+    );
+
+    orderSummary += "\n";
+
+let notesText = "";
+
+if (
+    result.order.customer &&
+    result.order.customer.notes &&
+    result.order.customer.notes !==
+    "SIN OBSERVACIONES"
+) {
+
+    notesText =
+        `📝 Observaciones: ${result.order.customer.notes}\n\n`;
+
+}
+
+return (
+    "✅ Pedido registrado correctamente\n\n" +
+    `📦 Pedido #${result.order.orderNumber}\n\n` +
+    orderSummary +
+    `💰 Total: $${result.order.total.toLocaleString("es-CO")}\n\n` +
+    notesText +
+    "📍 Recoger en punto\n\n" +
+    "Tu pedido quedará listo para recoger."
+);
 
 }
 

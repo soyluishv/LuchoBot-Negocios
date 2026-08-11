@@ -67,26 +67,60 @@ else if (waitingMinutes >= 30) {
 
 }
 
-    const products =
-        order.items
-        .map(
-            item =>
-                `${item.quantity}x ${item.name}`
-        )
-        .join("\n");
+const products =
+    order.items
+    .map(
+        item =>
+           `${item.quantity}x ${item.emoji} ${item.name}`
+    )
+    .join("\n");
+    
+response +=
+    `📦 #${order.orderNumber}\n\n` +
 
-        response +=
-           `📦 #${order.orderNumber}\n` +
-           `👤 ${order.customer.name}\n` +
-           `🍔 Productos:\n${products}\n\n` +
-            `📌 ${getStatusLabel(order.status)}\n` +
-            `⏱️ ${waitingMinutes} min | ${waitingIndicator}\n` +
-            `🚚 ${order.delivery.type === "pickup" ? "Recoger en punto" : "Domicilio"}\n` +
-            `💰 $${order.total.toLocaleString("es-CO")}\n` +
-            `━━━━━━━━━━━━━━━━\n\n`;
+    `👤 ${order.customer.name}\n` +
 
-              }
-             );
+    `${
+        order.customer.phone
+            ? `📱 ${order.customer.phone}\n`
+            : ""
+    }` +
+
+    `\n🍔 Productos:\n${products}\n\n` +
+
+    `💰 $${order.total.toLocaleString("es-CO")}\n\n` +
+
+    `🚚 ${
+        order.delivery.type === "pickup"
+            ? "Recoger en punto"
+            : "Domicilio"
+    }\n` +
+
+    `${
+        order.delivery.type === "delivery" &&
+        order.customer.address
+            ? `📍 ${order.customer.address}\n`
+            : ""
+    }` +
+
+    `${
+        order.delivery.type === "delivery" &&
+        order.customer.neighborhood
+            ? `🏘️ ${order.customer.neighborhood}\n`
+            : ""
+    }` +
+
+    `${
+        order.customer.notes
+            ? `📝 ${order.customer.notes}\n`
+            : ""
+    }` +
+
+    `\n⏱️ ${waitingMinutes} min ${waitingIndicator}\n` +
+
+    `━━━━━━━━━━━\n\n`;
+                  }
+                 );
 
         response +=
             `\nTotal pendientes: ${pendingOrders.length}`;
@@ -98,32 +132,122 @@ else if (waitingMinutes >= 30) {
 
     }
 
-    if (upperText === "VENTAS") {
+if (upperText === "VENTAS") {
 
-        const report =
-            adminReportService
-                .getSalesReport();
+    const report =
+        adminReportService
+            .getSalesReport();
+
+    return {
+
+        success: true,
+
+        message:
+            "📊 REPORTE DE VENTAS\n\n" +
+
+            `📦 Pedidos totales: ${report.totalOrders}\n` +
+
+            `💰 Ventas totales: $${report.totalSales.toLocaleString("es-CO")}\n\n` +
+
+            `✅ Entregados: ${report.delivered}\n` +
+
+            `⏳ Pendientes: ${report.pending}\n` +
+
+            `❌ Cancelados: ${report.cancelled}`
+
+    };
+
+}
+
+// ==========================
+// AYUDA
+// ==========================
+
+if (upperText === "AYUDA") {
+
+    return {
+
+        success: true,
+
+        message:
+            "🛠️ PANEL ADMIN\n\n" +
+
+            "📦 PENDIENTES\n" +
+            "📊 VENTAS\n" +
+            "📚 HISTORIAL\n" +
+            "🔎 BUSCAR 0001\n" +
+            "✅ OK 0001\n" +
+            "❌ CANCELAR 0001"
+
+    };
+
+}
+
+// ==========================
+// HISTORIAL
+// ==========================
+
+if (upperText === "HISTORIAL") {
+
+    const deliveredOrders =
+        adminReportService
+            .getDeliveredOrders();
+
+    if (
+        deliveredOrders.length === 0
+    ) {
 
         return {
 
             success: true,
 
             message:
-                "📊 REPORTE GENERAL\n\n" +
-                `Pedidos: ${report.totalOrders}\n` +
-                `Ventas: $${report.totalSales.toLocaleString("es-CO")}\n` +
-                `Entregados: ${report.delivered}\n` +
-                `Pendientes: ${report.pending}`
+                "📦 No hay pedidos entregados."
 
         };
 
     }
 
-    if (
-        upperText.startsWith(
-            "BUSCAR "
-        )
-    ) {
+let totalSales = 0;
+
+let response =
+    "📊 HISTORIAL DE PEDIDOS\n\n";
+
+deliveredOrders.forEach(
+    order => {
+
+        totalSales += order.total;
+
+        response +=
+            `✅ #${order.orderNumber} - $${order.total.toLocaleString("es-CO")}\n`;
+
+    }
+);
+
+response +=
+    "\n━━━━━━━━━━━\n";
+
+response +=
+    `\n📦 Entregados: ${deliveredOrders.length}`;
+
+response +=
+    `\n💰 Total vendido: $${totalSales.toLocaleString("es-CO")}`;
+
+    return {
+
+        success: true,
+
+        message: response
+
+    };
+
+}
+
+if (
+    upperText.startsWith(
+        "BUSCAR "
+    )
+) {
 
         const orderNumber =
             upperText.replace(
@@ -176,7 +300,7 @@ order.items.forEach(
             : "Domicilio"}\n\n` +
             `🛒 Productos:\n${products}\n` +
             `💰 Total: $${order.total.toLocaleString("es-CO")}\n\n` +
-            `📌 Estado: ${order.status}`
+            `📌 Estado: ${getStatusLabel(order.status)}`
 
     };
 

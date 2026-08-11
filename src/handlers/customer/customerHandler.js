@@ -1,3 +1,11 @@
+const cartEditorService = require(
+    "../../services/cart/cartEditorService"
+);
+
+const customerDataService = require(
+    "../../services/checkout/customerDataService"
+);
+
 const cartService = require(
     "../../services/cart/cartService"
 );
@@ -14,9 +22,6 @@ const sessionStorage = require(
     "../../storage/sessionStorage"
 );
 
-const customerDataService = require(
-    "../../services/checkout/customerDataService"
-);
 const {
     handleMainMenu
 } = require(
@@ -37,7 +42,11 @@ const {
 } = require(
     "../checkout/checkoutHandler"
 );
-
+const {
+    handleCart
+} = require(
+    "../cart/cartHandler"
+);
 // ==========================================
 // MENÚ DE CATEGORÍAS
 // ==========================================
@@ -47,21 +56,53 @@ function buildCategoriesMenu() {
     const categories =
         catalogService.getActiveCategories();
 
-    let menuText =
-        "📋 MENÚ\n\n";
+let menuText =
+    "🍔━━━━━━━━━━━━🍔\n\n" +
 
-    categories.forEach(
-        (category, index) => {
+    "📋 *MENÚ PRINCIPAL*\n\n";
 
-            menuText +=
-                `${index + 1}️⃣ ${category.name}\n`;
+categories.forEach(
+    (category, index) => {
 
+        let icon = "🍽️";
+
+        if (category.name.includes("Chuzo")) {
+            icon = "🍢";
         }
-    );
+        else if (category.name.includes("Perro")) {
+            icon = "🌭";
+        }
+        else if (category.name.includes("Arepa")) {
+            icon = "🫓";
+        }
+        else if (category.name.includes("Alas")) {
+            icon = "🍗";
+        }
+        else if (category.name.includes("Salchipapas")) {
+            icon = "🍟";
+        }
+        else if (category.name.includes("Hamburguesas")) {
+            icon = "🍔";
+        }
+        else if (category.name.includes("Adiciones")) {
+            icon = "➕";
+        }
+        else if (category.name.includes("Bebidas")) {
+            icon = "🥤";
+        }
 
-    menuText += "\n0️⃣ Volver";
+        menuText +=
+            `${index + 1}️⃣ ${icon} ${category.name}\n\n`;
 
-    return menuText;
+    }
+);
+
+menuText +=
+    "━━━━━━━━━━━━━━\n\n" +
+
+    "0️⃣ 🔙 Volver";
+
+return menuText;
 
 }
 
@@ -83,19 +124,32 @@ function buildProductsMenu(
             categoryId
         );
 
-    let menuText =
-        `🍔 ${category.name.toUpperCase()}\n\n`;
+let menuText =
+    "🍔━━━━━━━━━━━━🍔\n\n" +
 
-    products.forEach(
-        (product, index) => {
+    `📋 ${category.name.toUpperCase()}\n\n` +
 
-            menuText +=
-                `${index + 1}️⃣ ${product.name} - $${product.price.toLocaleString("es-CO")}\n`;
+    "━━━━━━━━━━━━━━\n\n";
 
-        }
-    );
+products.forEach(
+    (product, index) => {
 
-    menuText += "\n0️⃣ Volver";
+        menuText +=
+            `${index + 1}️⃣ ${product.name}\n` +
+
+            `💰 $${product.price.toLocaleString("es-CO")}\n\n`;
+
+    }
+);
+
+menuText +=
+    "━━━━━━━━━━━━━━\n\n" +
+
+    "0️⃣ 🔙 Volver\n\n" +
+
+    "👇 Elige un producto";
+
+return menuText;
 
     return menuText;
 
@@ -184,6 +238,194 @@ if (
 
 }
 
+if (
+    session.state ===
+    "VIEWING_CART"
+) {
+
+    return handleCart(
+        userId,
+        text,
+        session,
+        buildCategoriesMenu
+    );
+
+}
+
+if (
+    session.state ===
+    "SELECTING_QUANTITY_PRODUCT"
+) {
+
+    const position =
+        parseInt(text, 10);
+
+    const item =
+        cartEditorService.getItemByPosition(
+            userId,
+            position
+        );
+
+    if (!item) {
+
+        return (
+            "❌ Producto inválido.\n\n" +
+            "👇 Escribe un número válido"
+        );
+
+    }
+
+    sessionStorage.updateSession(
+        userId,
+        {
+            state:
+                "ENTERING_NEW_QUANTITY",
+
+            selectedPosition:
+                position
+        }
+    );
+
+    return (
+        "🔢 *NUEVA CANTIDAD*\n\n" +
+        "👇 Escribe la nueva cantidad"
+    );
+
+}
+
+if (
+    session.state ===
+    "ENTERING_NEW_QUANTITY"
+) {
+
+    const quantity =
+        parseInt(text, 10);
+
+    if (
+        isNaN(quantity) ||
+        quantity < 1
+    ) {
+
+        return (
+            "❌ Cantidad inválida."
+        );
+
+    }
+
+    const result =
+        cartEditorService.setQuantityByPosition(
+            userId,
+            session.selectedPosition,
+            quantity
+        );
+
+    if (!result.ok) {
+
+        return (
+            "❌ Cantidad inválida."
+        );
+
+    }
+
+    sessionStorage.updateSession(
+        userId,
+        {
+            state:
+                "VIEWING_CART",
+            selectedPosition:
+                null
+        }
+    );
+
+    const cart =
+        cartService.getCart(
+            userId
+        );
+
+    const subtotal =
+        cartService.getSubtotal(
+            userId
+        );
+
+    return (
+        "✅ Cantidad actualizada\n\n" +
+        cartTemplate.formatCart(
+            cart,
+            subtotal
+        )
+    );
+
+}
+
+if (
+    session.state ===
+    "REMOVING_PRODUCT"
+) {
+
+    const position =
+        parseInt(text, 10);
+
+    const result =
+        cartEditorService.removeByPosition(
+            userId,
+            position
+        );
+
+    if (!result.ok) {
+
+        return (
+            "❌ Producto inválido."
+        );
+
+    }
+
+    sessionStorage.updateSession(
+        userId,
+        {
+            state:
+                "VIEWING_CART"
+        }
+    );
+
+    const cart =
+        cartService.getCart(
+            userId
+        );
+
+    if (
+        cart.items.length === 0
+    ) {
+
+        sessionStorage.updateSession(
+            userId,
+            {
+                state:
+                    "VIEWING_CATEGORIES"
+            }
+        );
+
+        return (
+            "✅ Producto eliminado.\n\n" +
+            buildCategoriesMenu()
+        );
+
+    }
+
+    const subtotal =
+        cartService.getSubtotal(
+            userId
+        );
+
+    return (
+        "✅ Producto eliminado\n\n" +
+        cartTemplate.formatCart(
+            cart,
+            subtotal
+        )
+    );
+
+}
+
 const checkoutResponse =
 handleCheckout(
     userId,
@@ -200,7 +442,6 @@ if (
 }
 
 return "❌ Estado no reconocido.";
-
 }
 
 // ==========================================

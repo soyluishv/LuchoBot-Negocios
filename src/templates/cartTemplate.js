@@ -26,56 +26,91 @@ function formatCart(cart, subtotal) {
 
         return `🛒 *TU CARRITO*
 
-━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━
 
 Tu carrito está vacío.
 
 🍔 Agrega productos para comenzar tu pedido.
 
-━━━━━━━━━━━━━━━━━━━━━━`;
+━━━━━━━━━━━━━━━━`;
 
     }
 
-    const lines = [];
+const lines = [];
 
-    lines.push("🛒 *TU CARRITO*");
-    lines.push("");
-    lines.push("━━━━━━━━━━━━━━━━━━━━━━");
-    lines.push("");
+lines.push("🛒━━━━━━━━━━━🛒");
+lines.push("");
 
-    cart.items.forEach((item, index) => {
+lines.push("📋 *TU PEDIDO*");
+lines.push("");
 
-        const itemTotal =
-            item.unitPrice * item.quantity;
+lines.push("━━━━━━━━━━━━");
+lines.push("");
 
-        lines.push(
-            `${index + 1}️⃣ ${item.quantity}x ${item.name}`
-        );
+cart.items.forEach((item, index) => {
 
-        lines.push(
-            `   ${formatCurrency(itemTotal)}`
-        );
+    const itemTotal =
+        item.unitPrice * item.quantity;
 
-        lines.push("");
+lines.push(
+    `${index + 1}️⃣ ${item.emoji} [${item.categoryName}]`
+);
 
-    });
+lines.push(
+    `${item.name}`
+);
 
-    lines.push("━━━━━━━━━━━━━━━━━━━━━━");
+lines.push("");
 
-    lines.push(
-        `💰 *Subtotal: ${formatCurrency(subtotal)}*`
-    );
+lines.push(
+    `🔢 Cantidad: ${item.quantity}`
+);
 
-    lines.push("━━━━━━━━━━━━━━━━━━━━━━");
-    lines.push("");
+lines.push(
+    `💵 Unitario: ${formatCurrency(item.unitPrice)}`
+);
 
-    lines.push("1️⃣ ➕ Agregar productos");
-    lines.push("2️⃣ 🔢 Cambiar cantidad");
-    lines.push("3️⃣ 🗑️ Quitar producto");
-    lines.push("4️⃣ ✅ Finalizar pedido");
-    lines.push("0️⃣ ❌ Cancelar pedido");
+lines.push(
+    `💰 Total: ${formatCurrency(itemTotal)}`
+);
 
-    return lines.join("\n");
+lines.push("");
+
+});
+
+lines.push("━━━━━━━━━━━━━");
+lines.push("");
+
+lines.push("💵 *SUBTOTAL*");
+lines.push("");
+
+lines.push(
+    `${formatCurrency(subtotal)}`
+);
+
+lines.push("");
+
+lines.push("━━━━━━━━━━━━━");
+lines.push("");
+
+lines.push("1️⃣ ➕ Agregar productos");
+lines.push("");
+
+lines.push("2️⃣ 🔢 Cambiar cantidad");
+lines.push("");
+
+lines.push("3️⃣ 🗑️ Eliminar producto");
+lines.push("");
+
+lines.push("4️⃣ ✅ Finalizar pedido");
+lines.push("");
+
+lines.push("━━━━━━━━━━━━━");
+lines.push("");
+
+lines.push("0️⃣ ❌ Cancelar pedido");
+
+return lines.join("\n");
 
 }
 

@@ -14,10 +14,10 @@ const {
 
 function getPendingOrders() {
 
-const orders =
+    const orders =
         orderStorage.getAllOrders();
 
-     return orders
+    return orders
 
         .filter(
             order =>
@@ -28,6 +28,25 @@ const orders =
         .sort(
             (a, b) =>
                 a.createdAt - b.createdAt
+        );
+
+}
+
+// ==========================================
+// PEDIDOS ENTREGADOS
+// ==========================================
+
+function getDeliveredOrders() {
+
+    return orderStorage
+        .getAllOrders()
+        .filter(
+            order =>
+                order.status === "delivered"
+        )
+        .sort(
+            (a, b) =>
+                b.updatedAt - a.updatedAt
         );
 
 }
@@ -64,12 +83,19 @@ function getSalesReport() {
                 order.status !== "cancelled"
         ).length;
 
+    const cancelled =
+        orders.filter(
+            order =>
+               order.status === "cancelled"
+        ).length;
+
     return {
 
-        totalOrders,
-        totalSales,
-        delivered,
-        pending
+            totalOrders,
+            totalSales,
+            delivered,
+            pending,
+            cancelled
 
     };
 
@@ -87,9 +113,14 @@ function findOrder(orderNumber) {
 
 }
 
+// ==========================================
+// EXPORTAR
+// ==========================================
+
 module.exports = {
 
     getPendingOrders,
+    getDeliveredOrders,
     getSalesReport,
     findOrder
 

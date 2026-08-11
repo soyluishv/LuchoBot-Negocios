@@ -33,24 +33,18 @@ function processAdminCommand(message) {
 
     switch (command) {
 
-        case "PREPARAR":
-            newStatus =
-                STATUS.PREPARING;
-            break;
+        case "OK":
 
-        case "ENCAMINO":
-            newStatus =
-                STATUS.ON_THE_WAY;
-            break;
-
-        case "ENTREGADO":
             newStatus =
                 STATUS.DELIVERED;
+
             break;
 
         case "CANCELAR":
+
             newStatus =
                 STATUS.CANCELLED;
+
             break;
 
         default:
@@ -58,7 +52,10 @@ function processAdminCommand(message) {
             return {
                 success: false,
                 message:
-                    "❌ Comando no reconocido."
+                    "❌ Comando no reconocido.\n\n" +
+                    "Use:\n" +
+                    "OK 0017\n" +
+                    "CANCELAR 0017"
             };
 
     }
@@ -89,7 +86,9 @@ function processAdminCommand(message) {
         status: newStatus,
 
         message:
-            `✅ Pedido #${orderNumber} actualizado a ${newStatus}.`
+            newStatus === STATUS.DELIVERED
+                ? `✅ Pedido #${orderNumber} finalizado y enviado al historial.`
+                : `❌ Pedido #${orderNumber} cancelado.`
 
     };
 

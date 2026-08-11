@@ -79,14 +79,30 @@ function addProduct(userId, productId, quantity = 1) {
 
     } else {
 
-        cart.items.push({
-            productId: product.id,
-            name: product.name,
-            unitPrice: product.price,
-            quantity
-        });
+const category =
+    catalogService.getCategoryById(
+        product.categoryId
+    );
 
-    }
+if (existingItem) {
+
+    existingItem.quantity += quantity;
+
+} else {
+
+    cart.items.push({
+        productId: product.id,
+        categoryId: product.categoryId,
+        categoryName: category?.name || "",
+        emoji: category?.emoji || "🍔",
+        name: product.name,
+        unitPrice: product.price,
+        quantity
+    });
+
+}
+
+}
 
     cart.updatedAt = Date.now();
 

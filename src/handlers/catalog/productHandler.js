@@ -65,6 +65,13 @@ function handleProducts(
                 1
             );
 
+            const cart =
+    cartService.getCart(userId);
+
+const lastItem =
+    cart.items[cart.items.length - 1];
+
+
             sessionStorage.updateSession(
                 userId,
                 {
@@ -78,16 +85,27 @@ function handleProducts(
                 }
             );
 
-            return (
-                "✅ Producto agregado al carrito\n\n" +
-                `🍔 ${product.name}\n` +
-                `💰 $${product.price.toLocaleString("es-CO")}\n\n` +
-                "¿Qué deseas hacer ahora?\n\n" +
-                "1️⃣ Seguir comprando en esta categoría\n" +
-                "2️⃣ Ver otras categorías\n" +
-                "3️⃣ Ver carrito\n" +
-                "4️⃣ Menú principal"
-            );
+return (
+    "✅━━━━━━━━━━━━✅\n\n" +
+
+"🛒 *PRODUCTO AGREGADO*\n\n" +
+
+`${lastItem.emoji} [${lastItem.categoryName}]\n` +
+`${lastItem.name}\n` +
+`💰 $${product.price.toLocaleString("es-CO")}\n\n` +
+
+    "━━━━━━━━━━━━━━\n\n" +
+
+    "¿Qué deseas hacer ahora?\n\n" +
+
+    "1️⃣ 🛍️ Seguir comprando\n\n" +
+
+    "2️⃣ 📋 Ver categorías\n\n" +
+
+    "3️⃣ 🛒 Ver carrito\n\n" +
+
+    "4️⃣ 🏠 Menú principal"
+);
 
         }
 
@@ -136,26 +154,33 @@ function handleProducts(
 
         }
 
-        if (
-            text === "3"
-        ) {
+if (
+    text === "3"
+) {
 
-            const cart =
-                cartService.getCart(
-                    userId
-                );
-
-            const subtotal =
-                cartService.getSubtotal(
-                    userId
-                );
-
-            return cartTemplate.formatCart(
-                cart,
-                subtotal
-            );
-
+    sessionStorage.updateSession(
+        userId,
+        {
+            state: "VIEWING_CART"
         }
+    );
+
+    const cart =
+        cartService.getCart(
+            userId
+        );
+
+    const subtotal =
+        cartService.getSubtotal(
+            userId
+        );
+
+    return cartTemplate.formatCart(
+        cart,
+        subtotal
+    );
+
+}
 
         if (
             text === "4"
@@ -169,13 +194,32 @@ function handleProducts(
                 }
             );
 
-            return (
-                "🍔 Menú principal\n\n" +
-                "1️⃣ Ver menú\n" +
-                "2️⃣ Ver carrito\n" +
-                "3️⃣ Finalizar pedido\n\n" +
-                "0️⃣ Cancelar"
-            );
+return (
+    "🔥🍔 *RAPI CROCK'S* 🍔🔥\n\n" +
+
+    "━━━━━━━━━━━━━━━━━━\n\n" +
+
+    "😋 *¡Bienvenido!*\n\n" +
+
+    "🌭 Perros Calientes\n" +
+    "🍔 Hamburguesas\n" +
+    "🍟 Papas\n" +
+    "🥤 Bebidas\n\n" +
+
+    "━━━━━━━━━━━━━━━━━━\n\n" +
+
+    "1️⃣ 🍔 Ver Menú\n\n" +
+
+    "2️⃣ 🛒 Ver Carrito\n\n" +
+
+    "3️⃣ ✅ Finalizar Pedido\n\n" +
+
+    "━━━━━━━━━━━━━━━━━━\n\n" +
+
+    "0️⃣ ❌ Cancelar\n\n" +
+
+    "👇 Responde con una opción"
+);
 
         }
 

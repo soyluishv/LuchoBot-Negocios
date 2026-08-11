@@ -30,24 +30,31 @@ function handleMainMenu(
 
     }
 
-    if (text === "2") {
+if (text === "2") {
 
-        const cart =
-            cartService.getCart(
-                userId
-            );
+    sessionStorage.updateSession(
+        userId,
+        {
+            state: "VIEWING_CART"
+        }
+    );
 
-        const subtotal =
-            cartService.getSubtotal(
-                userId
-            );
-
-        return cartTemplate.formatCart(
-            cart,
-            subtotal
+    const cart =
+        cartService.getCart(
+            userId
         );
 
-    }
+    const subtotal =
+        cartService.getSubtotal(
+            userId
+        );
+
+    return cartTemplate.formatCart(
+        cart,
+        subtotal
+    );
+
+}
 
     if (text === "3") {
 
@@ -75,21 +82,40 @@ function handleMainMenu(
             }
         );
 
-        return (
-            "🚚 ¿Cómo deseas recibir tu pedido?\n\n" +
-            "1️⃣ Domicilio\n" +
-            "2️⃣ Recoger en punto"
-        );
+return (
+    "🚚━━━━━━━━━━━━🚚\n\n" +
+
+    "📦 *ENTREGA DEL PEDIDO*\n\n" +
+
+    "━━━━━━━━━━━━━━\n\n" +
+
+    "1️⃣ 🏠 Domicilio\n\n" +
+
+    "2️⃣ 🛍️ Recoger en punto\n\n" +
+
+    "━━━━━━━━━━━━━━\n\n" +
+
+    "👇 Elige una opción"
+);
 
     }
 
-    return (
-        "🍔 Bienvenido a Rapicros Alita\n\n" +
-        "1️⃣ Ver menú\n" +
-        "2️⃣ Ver carrito\n" +
-        "3️⃣ Finalizar pedido\n\n" +
-        "0️⃣ Cancelar"
-    );
+return (
+    "🔥🍔 *RAPI CROCK'S* 🍔🔥\n\n" +
+    "━━━━━━━━━━━━━━━━━━\n\n" +
+    "😋 *¡Bienvenido!*\n\n" +
+    "🌭 Perros Calientes\n" +
+    "🍔 Hamburguesas\n" +
+    "🍟 Papas\n" +
+    "🥤 Bebidas\n\n" +
+    "━━━━━━━━━━━━━━━━━━\n\n" +
+    "1️⃣ 🍔 Ver Menú\n\n" +
+    "2️⃣ 🛒 Ver Carrito\n\n" +
+    "3️⃣ ✅ Finalizar Pedido\n\n" +
+    "━━━━━━━━━━━━━━━━━━\n\n" +
+    "0️⃣ ❌ Cancelar\n\n" +
+    "👇 Responde con una opción"
+);
 
 }
 

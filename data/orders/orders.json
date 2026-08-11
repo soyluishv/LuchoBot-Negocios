@@ -1,216 +1,10 @@
 {
-  "lastOrderNumber": 14,
+  "lastOrderNumber": 33,
   "orders": [
     {
       "orderNumber": "0001",
-      "userId": "cliente-persistencia",
-      "status": "delivered",
-      "items": [
-        {
-          "productId": "HAM001",
-          "name": "Hamburguesa Estándar",
-          "unitPrice": 18000,
-          "quantity": 2,
-          "total": 36000
-        }
-      ],
-      "subtotal": 36000,
-      "delivery": {
-        "type": "delivery",
-        "price": 3000
-      },
-      "customer": {
-        "name": "Cliente Prueba",
-        "phone": "3001234567",
-        "address": "Dirección de prueba",
-        "neighborhood": "La Playita",
-        "notes": ""
-      },
-      "paymentMethod": "cash_on_delivery",
-      "total": 39000,
-      "createdAt": 1786057434939,
-      "updatedAt": 1786062945667
-    },
-    {
-      "orderNumber": "0002",
-      "userId": "cliente-persistencia",
-      "status": "delivered",
-      "items": [
-        {
-          "productId": "HAM001",
-          "name": "Hamburguesa Estándar",
-          "unitPrice": 18000,
-          "quantity": 2,
-          "total": 36000
-        }
-      ],
-      "subtotal": 36000,
-      "delivery": {
-        "type": "delivery",
-        "price": 3000
-      },
-      "customer": {
-        "name": "Cliente Prueba",
-        "phone": "3001234567",
-        "address": "Dirección de prueba",
-        "neighborhood": "La Playita",
-        "notes": ""
-      },
-      "paymentMethod": "cash_on_delivery",
-      "total": 39000,
-      "createdAt": 1786057475733,
-      "updatedAt": 1786061647313
-    },
-    {
-      "orderNumber": "0003",
       "userId": "11222867038253@lid",
       "status": "delivered",
-      "items": [
-        {
-          "productId": "HAM001",
-          "name": "Hamburguesa Estándar",
-          "unitPrice": 18000,
-          "quantity": 1,
-          "total": 18000
-        }
-      ],
-      "subtotal": 18000,
-      "delivery": {
-        "type": "delivery",
-        "price": 3000
-      },
-      "customer": {
-        "name": "luis",
-        "phone": "3148410267",
-        "address": "calle 132 a sur",
-        "neighborhood": "la playita",
-        "notes": "no"
-      },
-      "paymentMethod": "cash_on_delivery",
-      "total": 21000,
-      "createdAt": 1786139936103,
-      "updatedAt": 1786153777809
-    },
-    {
-      "orderNumber": "0004",
-      "userId": "154305692741845@lid",
-      "status": "confirmed",
-      "items": [
-        {
-          "productId": "HAM001",
-          "name": "Hamburguesa Estándar",
-          "unitPrice": 18000,
-          "quantity": 1,
-          "total": 18000
-        }
-      ],
-      "subtotal": 18000,
-      "delivery": {
-        "type": "pickup",
-        "price": 0
-      },
-      "customer": {
-        "name": "luis hernandez",
-        "phone": "3148410267",
-        "address": "caldas",
-        "neighborhood": "la playita",
-        "notes": "no"
-      },
-      "paymentMethod": "pay_at_store",
-      "total": 18000,
-      "createdAt": 1786155778939
-    },
-    {
-      "orderNumber": "0005",
-      "userId": "154305692741845@lid",
-      "status": "confirmed",
-      "items": [
-        {
-          "productId": "HAM001",
-          "name": "Hamburguesa Estándar",
-          "unitPrice": 18000,
-          "quantity": 1,
-          "total": 18000
-        }
-      ],
-      "subtotal": 18000,
-      "delivery": {
-        "type": "pickup",
-        "price": 0
-      },
-      "customer": {
-        "name": "luis",
-        "phone": "3148410267",
-        "address": "jshsvd",
-        "neighborhood": "hdhdhd",
-        "notes": "no"
-      },
-      "paymentMethod": "pay_at_store",
-      "total": 18000,
-      "createdAt": 1786156265598
-    },
-    {
-      "orderNumber": "0006",
-      "userId": "11222867038253@lid",
-      "status": "confirmed",
-      "items": [
-        {
-          "productId": "HAM001",
-          "name": "Hamburguesa Estándar",
-          "unitPrice": 18000,
-          "quantity": 1,
-          "total": 18000
-        }
-      ],
-      "subtotal": 18000,
-      "delivery": {
-        "type": "pickup",
-        "price": 0
-      },
-      "customer": {
-        "name": "luis",
-        "phone": "3148410267",
-        "address": "RECOGE EN PUNTO",
-        "neighborhood": "RECOGE EN PUNTO",
-        "notes": "SIN OBSERVACIONES"
-      },
-      "paymentMethod": "pay_at_store",
-      "total": 18000,
-      "createdAt": 1786158039427
-    },
-    {
-      "orderNumber": "0007",
-      "userId": "154305692741845@lid",
-      "status": "confirmed",
-      "items": [
-        {
-          "productId": "HAM001",
-          "name": "Hamburguesa Estándar",
-          "unitPrice": 18000,
-          "quantity": 1,
-          "total": 18000
-        }
-      ],
-      "subtotal": 18000,
-      "delivery": {
-        "type": "pickup",
-        "price": 0
-      },
-      "customer": {
-        "name": "luis",
-        "phone": "3148410267",
-        "address": "RECOGE EN PUNTO",
-        "neighborhood": "RECOGE EN PUNTO",
-        "notes": "SIN OBSERVACIONES"
-      },
-      "paymentMethod": "pay_at_store",
-      "total": 18000,
-      "createdAt": 1786158372777
-    },
-    {
-      "orderNumber": "0008",
-      "userId": "154305692741845@lid",
-      "status": "confirmed",
       "items": [
         {
           "productId": "CHU001",
@@ -218,121 +12,105 @@
           "unitPrice": 21000,
           "quantity": 1,
           "total": 21000
+        }
+      ],
+      "subtotal": 21000,
+      "delivery": {
+        "type": "delivery",
+        "price": 3000
+      },
+      "customer": {
+        "name": "paula",
+        "phone": "3138410276",
+        "address": "calle 132 a sur 47-08",
+        "neighborhood": "la playita",
+        "notes": "sin cebolla"
+      },
+      "paymentMethod": "cash_on_delivery",
+      "total": 24000,
+      "createdAt": 1786224421243,
+      "updatedAt": 1786224629314
+    },
+    {
+      "orderNumber": "0002",
+      "userId": "11222867038253@lid",
+      "status": "delivered",
+      "items": [
+        {
+          "productId": "SAL007",
+          "name": "Grande con Tocineta",
+          "unitPrice": 23000,
+          "quantity": 1,
+          "total": 23000
+        }
+      ],
+      "subtotal": 23000,
+      "delivery": {
+        "type": "delivery",
+        "price": 3000
+      },
+      "customer": {
+        "name": "mono",
+        "phone": "31483597",
+        "address": "calle 135a sur 47-09",
+        "neighborhood": "la planta",
+        "notes": "sin cebolla"
+      },
+      "paymentMethod": "cash_on_delivery",
+      "total": 26000,
+      "createdAt": 1786225275014,
+      "updatedAt": 1786304280241,
+      "completedAt": 1786304280240
+    },
+    {
+      "orderNumber": "0003",
+      "userId": "154305692741845@lid",
+      "status": "delivered",
+      "items": [
+        {
+          "productId": "PER004",
+          "name": "Perra con Papas",
+          "unitPrice": 22000,
+          "quantity": 1,
+          "total": 22000
         },
         {
-          "productId": "PER002",
-          "name": "Perro con Papas",
-          "unitPrice": 20000,
+          "productId": "HAM004",
+          "name": "Hamburguesa Doble en Combo",
+          "unitPrice": 28000,
           "quantity": 1,
-          "total": 20000
-        },
-        {
-          "productId": "ARE001",
-          "name": "Arepaburguer Estándar",
-          "unitPrice": 16000,
-          "quantity": 1,
-          "total": 16000
+          "total": 28000
         },
         {
           "productId": "BEB007",
           "name": "Coca-Cola 1.5 L",
           "unitPrice": 8000,
-          "quantity": 1,
-          "total": 8000
-        },
-        {
-          "productId": "ADI005",
-          "name": "1 Ala",
-          "unitPrice": 6000,
-          "quantity": 1,
-          "total": 6000
-        }
-      ],
-      "subtotal": 71000,
-      "delivery": {
-        "type": "pickup",
-        "price": 0
-      },
-      "customer": {
-        "name": "luis",
-        "phone": "3148410267",
-        "address": "RECOGE EN PUNTO",
-        "neighborhood": "RECOGE EN PUNTO",
-        "notes": "SIN OBSERVACIONES"
-      },
-      "paymentMethod": "pay_at_store",
-      "total": 71000,
-      "createdAt": 1786158914126
-    },
-    {
-      "orderNumber": "0009",
-      "userId": "154305692741845@lid",
-      "status": "confirmed",
-      "items": [
-        {
-          "productId": "HAM001",
-          "name": "Hamburguesa Estándar",
-          "unitPrice": 18000,
-          "quantity": 1,
-          "total": 18000
-        }
-      ],
-      "subtotal": 18000,
-      "delivery": {
-        "type": "pickup",
-        "price": 0
-      },
-      "customer": {
-        "name": "luis",
-        "phone": "3148410267",
-        "address": "RECOGE EN PUNTO",
-        "neighborhood": "RECOGE EN PUNTO",
-        "notes": "SIN OBSERVACIONES"
-      },
-      "paymentMethod": "pay_at_store",
-      "total": 18000,
-      "createdAt": 1786160286082
-    },
-    {
-      "orderNumber": "0010",
-      "userId": "11222867038253@lid",
-      "status": "confirmed",
-      "items": [
-        {
-          "productId": "ARE001",
-          "name": "Arepaburguer Estándar",
-          "unitPrice": 16000,
-          "quantity": 1,
+          "quantity": 2,
           "total": 16000
-        },
-        {
-          "productId": "CHU001",
-          "name": "Chuzo de Pollo",
-          "unitPrice": 21000,
-          "quantity": 1,
-          "total": 21000
         }
       ],
-      "subtotal": 37000,
+      "subtotal": 66000,
       "delivery": {
-        "type": "delivery",
-        "price": 3000
+        "type": "pickup",
+        "price": 0
       },
       "customer": {
-        "name": "Paula Andrea Zapata",
-        "phone": "3116399991",
-        "address": "cll 132 a sur 4709",
-        "neighborhood": "la playita",
-        "notes": "bastante salsa"
+        "name": "Laura",
+        "phone": "38927178",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
       },
-      "paymentMethod": "cash_on_delivery",
-      "total": 40000,
-      "createdAt": 1786160677890
+      "paymentMethod": "pay_at_store",
+      "total": 66000,
+      "createdAt": 1786225502613,
+      "completedAt": 1786307853892,
+      "updatedAt": 1786307853893
     },
     {
-      "orderNumber": "0011",
-      "userId": "154305692741845@lid",
-      "status": "preparing",
+      "orderNumber": "0004",
+      "userId": "11222867038253@lid",
+      "status": "delivered",
       "items": [
         {
           "productId": "ALA006",
@@ -340,6 +118,37 @@
           "unitPrice": 22000,
           "quantity": 1,
           "total": 22000
+        }
+      ],
+      "subtotal": 22000,
+      "delivery": {
+        "type": "delivery",
+        "price": 3000
+      },
+      "customer": {
+        "name": "pepe",
+        "phone": "3148666",
+        "address": "calle 132",
+        "neighborhood": "planta",
+        "notes": "sin pan"
+      },
+      "paymentMethod": "cash_on_delivery",
+      "total": 25000,
+      "createdAt": 1786226431972,
+      "completedAt": 1786310433197,
+      "updatedAt": 1786310433199
+    },
+    {
+      "orderNumber": "0005",
+      "userId": "154305692741845@lid",
+      "status": "delivered",
+      "items": [
+        {
+          "productId": "SAL008",
+          "name": "Grande con Todo",
+          "unitPrice": 30000,
+          "quantity": 1,
+          "total": 30000
         },
         {
           "productId": "BEB007",
@@ -347,77 +156,183 @@
           "unitPrice": 8000,
           "quantity": 1,
           "total": 8000
-        },
-        {
-          "productId": "ADI001",
-          "name": "Tocineta",
-          "unitPrice": 6000,
-          "quantity": 1,
-          "total": 6000
         }
       ],
-      "subtotal": 36000,
+      "subtotal": 38000,
       "delivery": {
         "type": "delivery",
         "price": 3000
       },
       "customer": {
         "name": "Laura",
-        "phone": "3148410267",
-        "address": "calle 132 asur numero 4709",
-        "neighborhood": "La playita",
-        "notes": "no"
+        "phone": "3118770564",
+        "address": "Calle playita",
+        "neighborhood": "playita",
+        "notes": "No"
       },
       "paymentMethod": "cash_on_delivery",
-      "total": 39000,
-      "createdAt": 1786162441316,
-      "updatedAt": 1786167745246
+      "total": 41000,
+      "createdAt": 1786226503525,
+      "completedAt": 1786307562235,
+      "updatedAt": 1786307562236
     },
     {
-      "orderNumber": "0012",
-      "userId": "154305692741845@lid",
-      "status": "confirmed",
+      "orderNumber": "0006",
+      "userId": "11222867038253@lid",
+      "status": "delivered",
       "items": [
         {
-          "productId": "CHU001",
-          "name": "Chuzo de Pollo",
-          "unitPrice": 21000,
+          "productId": "SAL002",
+          "name": "Personal con Carne de Hamburguesa",
+          "unitPrice": 17000,
           "quantity": 1,
-          "total": 21000
-        },
-        {
-          "productId": "BEB007",
-          "name": "Coca-Cola 1.5 L",
-          "unitPrice": 8000,
-          "quantity": 1,
-          "total": 8000
-        },
-        {
-          "productId": "BEB005",
-          "name": "Hit 400 ml",
-          "unitPrice": 4000,
-          "quantity": 1,
-          "total": 4000
+          "total": 17000
         }
       ],
-      "subtotal": 33000,
+      "subtotal": 17000,
       "delivery": {
         "type": "pickup",
         "price": 0
       },
       "customer": {
-        "name": "Paula",
-        "phone": "314841067",
+        "name": "juan",
+        "phone": "314843999",
         "address": "RECOGE EN PUNTO",
         "neighborhood": "RECOGE EN PUNTO",
         "notes": "SIN OBSERVACIONES"
       },
       "paymentMethod": "pay_at_store",
-      "total": 33000,
-      "createdAt": 1786168866130
+      "total": 17000,
+      "createdAt": 1786226519191,
+      "completedAt": 1786307552345,
+      "updatedAt": 1786307552346
     },
     {
-      "orderNumber": "0013",
+      "orderNumber": "0007",
+      "userId": "11222867038253@lid",
+      "status": "delivered",
+      "items": [
+        {
+          "productId": "ALA006",
+          "name": "3 Alas con Papas, Salchicha y Arepa",
+          "unitPrice": 22000,
+          "quantity": 1,
+          "total": 22000
+        }
+      ],
+      "subtotal": 22000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "luis",
+        "phone": "3148410267",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 22000,
+      "createdAt": 1786305065373,
+      "completedAt": 1786307524066,
+      "updatedAt": 1786307524067
+    },
+    {
+      "orderNumber": "0008",
+      "userId": "11222867038253@lid",
+      "status": "delivered",
+      "items": [
+        {
+          "productId": "ADI002",
+          "name": "Carne de Hamburguesa",
+          "unitPrice": 6000,
+          "quantity": 1,
+          "total": 6000
+        }
+      ],
+      "subtotal": 6000,
+      "delivery": {
+        "type": "delivery",
+        "price": 3000
+      },
+      "customer": {
+        "name": "gato",
+        "phone": "3148410987",
+        "address": "calle 132 a sur 42-97",
+        "neighborhood": "playita",
+        "notes": "sin cebolla"
+      },
+      "paymentMethod": "cash_on_delivery",
+      "total": 9000,
+      "createdAt": 1786305186469,
+      "completedAt": 1786307486310,
+      "updatedAt": 1786307486312
+    },
+    {
+      "orderNumber": "0009",
+      "userId": "154305692741845@lid",
+      "status": "cancelled",
+      "items": [
+        {
+          "productId": "HAM001",
+          "name": "Hamburguesa Estándar",
+          "unitPrice": 18000,
+          "quantity": 1,
+          "total": 18000
+        }
+      ],
+      "subtotal": 18000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "pepa",
+        "phone": "314282896",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 18000,
+      "createdAt": 1786305459731,
+      "completedAt": null,
+      "updatedAt": 1786306577160
+    },
+    {
+      "orderNumber": "0010",
+      "userId": "154305692741845@lid",
+      "status": "delivered",
+      "items": [
+        {
+          "productId": "HAM001",
+          "name": "Hamburguesa Estándar",
+          "unitPrice": 18000,
+          "quantity": 1,
+          "total": 18000
+        }
+      ],
+      "subtotal": 18000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "perro",
+        "phone": "314865448",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 18000,
+      "createdAt": 1786306303501,
+      "completedAt": 1786306533405,
+      "updatedAt": 1786306533406
+    },
+    {
+      "orderNumber": "0011",
       "userId": "154305692741845@lid",
       "status": "confirmed",
       "items": [
@@ -435,44 +350,777 @@
         "price": 0
       },
       "customer": {
-        "name": "laura",
-        "phone": "3116399991",
+        "name": "tortuga",
+        "phone": "3148410267",
         "address": "RECOGE EN PUNTO",
         "neighborhood": "RECOGE EN PUNTO",
         "notes": "SIN OBSERVACIONES"
       },
       "paymentMethod": "pay_at_store",
       "total": 18000,
-      "createdAt": 1786207052024
+      "createdAt": 1786311016411
     },
     {
-      "orderNumber": "0014",
+      "orderNumber": "0012",
       "userId": "154305692741845@lid",
       "status": "confirmed",
       "items": [
         {
-          "productId": "BEB001",
-          "name": "Coca-Cola 250 ml",
-          "unitPrice": 3000,
+          "productId": "ALA003",
+          "name": "3 Alas con Papas y Arepa",
+          "unitPrice": 20000,
           "quantity": 1,
-          "total": 3000
+          "total": 20000
         }
       ],
-      "subtotal": 3000,
+      "subtotal": 20000,
+      "delivery": {
+        "type": "delivery",
+        "price": 3000
+      },
+      "customer": {
+        "name": "gato",
+        "phone": "3148410976",
+        "address": "calle 132 a sur 67-89",
+        "neighborhood": "planta",
+        "notes": "sin pan"
+      },
+      "paymentMethod": "cash_on_delivery",
+      "total": 23000,
+      "createdAt": 1786311321770
+    },
+    {
+      "orderNumber": "0013",
+      "userId": "11222867038253@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "HAM001",
+          "name": "Hamburguesa Estándar",
+          "unitPrice": 18000,
+          "quantity": 1,
+          "total": 18000
+        }
+      ],
+      "subtotal": 18000,
+      "delivery": {
+        "type": "delivery",
+        "price": 3000
+      },
+      "customer": {
+        "name": "pepe",
+        "phone": "31482345",
+        "address": "calle 132 a sur 47-09",
+        "neighborhood": "playita",
+        "notes": "no"
+      },
+      "paymentMethod": "cash_on_delivery",
+      "total": 21000,
+      "createdAt": 1786317929169
+    },
+    {
+      "orderNumber": "0014",
+      "userId": "11222867038253@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "HAM001",
+          "name": "Hamburguesa Estándar",
+          "unitPrice": 18000,
+          "quantity": 1,
+          "total": 18000
+        }
+      ],
+      "subtotal": 18000,
       "delivery": {
         "type": "pickup",
         "price": 0
       },
       "customer": {
-        "name": "estela",
-        "phone": "316000000",
+        "name": "clara",
+        "phone": "3148410099",
         "address": "RECOGE EN PUNTO",
         "neighborhood": "RECOGE EN PUNTO",
         "notes": "SIN OBSERVACIONES"
       },
       "paymentMethod": "pay_at_store",
-      "total": 3000,
-      "createdAt": 1786213454885
+      "total": 18000,
+      "createdAt": 1786318076910
+    },
+    {
+      "orderNumber": "0015",
+      "userId": "11222867038253@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "CHU001",
+          "name": "Chuzo de Pollo",
+          "unitPrice": 21000,
+          "quantity": 1,
+          "total": 21000
+        },
+        {
+          "productId": "PER003",
+          "name": "Perra",
+          "unitPrice": 19000,
+          "quantity": 1,
+          "total": 19000
+        }
+      ],
+      "subtotal": 40000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "ganzo",
+        "phone": "31485432",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 40000,
+      "createdAt": 1786324432913
+    },
+    {
+      "orderNumber": "0016",
+      "userId": "11222867038253@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "ARE001",
+          "name": "Arepaburguer Estándar",
+          "unitPrice": 16000,
+          "quantity": 1,
+          "total": 16000
+        },
+        {
+          "productId": "HAM004",
+          "name": "Hamburguesa Doble en Combo",
+          "unitPrice": 28000,
+          "quantity": 1,
+          "total": 28000
+        },
+        {
+          "productId": "BEB008",
+          "name": "Postobón 1.5 L",
+          "unitPrice": 7000,
+          "quantity": 1,
+          "total": 7000
+        },
+        {
+          "productId": "ALA006",
+          "name": "3 Alas con Papas, Salchicha y Arepa",
+          "unitPrice": 22000,
+          "quantity": 1,
+          "total": 22000
+        }
+      ],
+      "subtotal": 73000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "pepe",
+        "phone": "31485287",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 73000,
+      "createdAt": 1786339918621
+    },
+    {
+      "orderNumber": "0017",
+      "userId": "11222867038253@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "SAL007",
+          "name": "Grande con Tocineta",
+          "unitPrice": 23000,
+          "quantity": 3,
+          "total": 69000
+        },
+        {
+          "productId": "BEB006",
+          "name": "H2O 600 ml",
+          "unitPrice": 4000,
+          "quantity": 5,
+          "total": 20000
+        }
+      ],
+      "subtotal": 89000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "pdos",
+        "phone": "37262522",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 89000,
+      "createdAt": 1786346107241
+    },
+    {
+      "orderNumber": "0018",
+      "userId": "11222867038253@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "SAL007",
+          "name": "Grande con Tocineta",
+          "unitPrice": 23000,
+          "quantity": 1,
+          "total": 23000
+        }
+      ],
+      "subtotal": 23000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "pdpsp",
+        "phone": "317765333",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 23000,
+      "createdAt": 1786348302476
+    },
+    {
+      "orderNumber": "0019",
+      "userId": "11222867038253@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "SAL007",
+          "name": "Grande con Tocineta",
+          "unitPrice": 23000,
+          "quantity": 1,
+          "total": 23000
+        }
+      ],
+      "subtotal": 23000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "psjsbd",
+        "phone": "317263633",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 23000,
+      "createdAt": 1786349485509
+    },
+    {
+      "orderNumber": "0020",
+      "userId": "11222867038253@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "SAL007",
+          "name": "Grande con Tocineta",
+          "unitPrice": 23000,
+          "quantity": 1,
+          "total": 23000
+        }
+      ],
+      "subtotal": 23000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "ldbd",
+        "phone": "314987633",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 23000,
+      "createdAt": 1786351754328
+    },
+    {
+      "orderNumber": "0021",
+      "userId": "11222867038253@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "SAL007",
+          "categoryId": "salchipapas",
+          "categoryName": "Salchipapas",
+          "emoji": "🍟",
+          "name": "Grande con Tocineta",
+          "unitPrice": 23000,
+          "quantity": 1,
+          "total": 23000
+        }
+      ],
+      "subtotal": 23000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "pspsps",
+        "phone": "31477773",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 23000,
+      "createdAt": 1786382772980
+    },
+    {
+      "orderNumber": "0022",
+      "userId": "11222867038253@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "SAL007",
+          "categoryId": "salchipapas",
+          "categoryName": "Salchipapas",
+          "emoji": "🍟",
+          "name": "Grande con Tocineta",
+          "unitPrice": 23000,
+          "quantity": 1,
+          "total": 23000
+        }
+      ],
+      "subtotal": 23000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "oskdjd",
+        "phone": "314444444",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 23000,
+      "createdAt": 1786383697673
+    },
+    {
+      "orderNumber": "0023",
+      "userId": "11222867038253@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "SAL007",
+          "categoryId": "salchipapas",
+          "categoryName": "Salchipapas",
+          "emoji": "🍟",
+          "name": "Grande con Tocineta",
+          "unitPrice": 23000,
+          "quantity": 1,
+          "total": 23000
+        }
+      ],
+      "subtotal": 23000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "jdbdhd",
+        "phone": "313938383",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 23000,
+      "createdAt": 1786384341138
+    },
+    {
+      "orderNumber": "0024",
+      "userId": "154305692741845@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "CHU001",
+          "categoryId": "chuzos",
+          "categoryName": "Chuzo de Pollo",
+          "emoji": "🍢",
+          "name": "Chuzo de Pollo",
+          "unitPrice": 21000,
+          "quantity": 1,
+          "total": 21000
+        }
+      ],
+      "subtotal": 21000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "pepe",
+        "phone": "314841026709",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 21000,
+      "createdAt": 1786471985153
+    },
+    {
+      "orderNumber": "0025",
+      "userId": "154305692741845@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "HAM004",
+          "categoryId": "hamburguesas",
+          "categoryName": "Hamburguesas",
+          "emoji": "🍔",
+          "name": "Hamburguesa Doble en Combo",
+          "unitPrice": 28000,
+          "quantity": 1,
+          "total": 28000
+        }
+      ],
+      "subtotal": 28000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "Gato",
+        "phone": "3148410267",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 28000,
+      "createdAt": 1786473400890
+    },
+    {
+      "orderNumber": "0026",
+      "userId": "154305692741845@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "ARE001",
+          "categoryId": "arepaburguer",
+          "categoryName": "Arepaburguer",
+          "emoji": "🫓",
+          "name": "Arepaburguer Estándar",
+          "unitPrice": 16000,
+          "quantity": 1,
+          "total": 16000
+        }
+      ],
+      "subtotal": 16000,
+      "delivery": {
+        "type": "delivery",
+        "price": 3000
+      },
+      "customer": {
+        "name": "joaqui",
+        "phone": "3148410278",
+        "address": "calle 132 a sur 47-09",
+        "neighborhood": "playita",
+        "notes": "sin tomate"
+      },
+      "paymentMethod": "cash_on_delivery",
+      "total": 19000,
+      "createdAt": 1786474256101
+    },
+    {
+      "orderNumber": "0027",
+      "userId": "154305692741845@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "HAM001",
+          "categoryId": "hamburguesas",
+          "categoryName": "Hamburguesas",
+          "emoji": "🍔",
+          "name": "Hamburguesa Estándar",
+          "unitPrice": 18000,
+          "quantity": 1,
+          "total": 18000
+        }
+      ],
+      "subtotal": 18000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "pepe",
+        "phone": "3148410267",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "sin tomate"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 18000,
+      "createdAt": 1786476549189
+    },
+    {
+      "orderNumber": "0028",
+      "userId": "154305692741845@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "HAM001",
+          "categoryId": "hamburguesas",
+          "categoryName": "Hamburguesas",
+          "emoji": "🍔",
+          "name": "Hamburguesa Estándar",
+          "unitPrice": 18000,
+          "quantity": 1,
+          "total": 18000
+        }
+      ],
+      "subtotal": 18000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "pepe",
+        "phone": "3148410278",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "sin tomate"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 18000,
+      "createdAt": 1786477418334
+    },
+    {
+      "orderNumber": "0029",
+      "userId": "154305692741845@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "HAM001",
+          "categoryId": "hamburguesas",
+          "categoryName": "Hamburguesas",
+          "emoji": "🍔",
+          "name": "Hamburguesa Estándar",
+          "unitPrice": 18000,
+          "quantity": 1,
+          "total": 18000
+        }
+      ],
+      "subtotal": 18000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "pepe",
+        "phone": "3148410267",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "sin tomate"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 18000,
+      "createdAt": 1786477874930
+    },
+    {
+      "orderNumber": "0030",
+      "userId": "154305692741845@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "SAL004",
+          "categoryId": "salchipapas",
+          "categoryName": "Salchipapas",
+          "emoji": "🍟",
+          "name": "Personal con Todo",
+          "unitPrice": 21000,
+          "quantity": 1,
+          "total": 21000
+        }
+      ],
+      "subtotal": 21000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "juana",
+        "phone": "3142876539",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "sin tomate"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 21000,
+      "createdAt": 1786479723476
+    },
+    {
+      "orderNumber": "0031",
+      "userId": "154305692741845@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "PER004",
+          "categoryId": "perros",
+          "categoryName": "Perros y Perras",
+          "emoji": "🌭",
+          "name": "Perra con Papas",
+          "unitPrice": 22000,
+          "quantity": 1,
+          "total": 22000
+        },
+        {
+          "productId": "ARE001",
+          "categoryId": "arepaburguer",
+          "categoryName": "Arepaburguer",
+          "emoji": "🫓",
+          "name": "Arepaburguer Estándar",
+          "unitPrice": 16000,
+          "quantity": 1,
+          "total": 16000
+        },
+        {
+          "productId": "ALA004",
+          "categoryId": "alas",
+          "categoryName": "Combos de Alas",
+          "emoji": "🍗",
+          "name": "1 Ala con Papas, Salchicha y Arepa",
+          "unitPrice": 14000,
+          "quantity": 1,
+          "total": 14000
+        },
+        {
+          "productId": "ALA002",
+          "categoryId": "alas",
+          "categoryName": "Combos de Alas",
+          "emoji": "🍗",
+          "name": "2 Alas con Papas y Arepa",
+          "unitPrice": 16000,
+          "quantity": 1,
+          "total": 16000
+        }
+      ],
+      "subtotal": 68000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "nestor",
+        "phone": "3142873409",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 68000,
+      "createdAt": 1786481097625
+    },
+    {
+      "orderNumber": "0032",
+      "userId": "154305692741845@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "BEB005",
+          "categoryId": "bebidas",
+          "categoryName": "Bebidas",
+          "emoji": "🥤",
+          "name": "Hit 400 ml",
+          "unitPrice": 4000,
+          "quantity": 1,
+          "total": 4000
+        },
+        {
+          "productId": "BEB007",
+          "categoryId": "bebidas",
+          "categoryName": "Bebidas",
+          "emoji": "🥤",
+          "name": "Coca-Cola 1.5 L",
+          "unitPrice": 8000,
+          "quantity": 5,
+          "total": 40000
+        }
+      ],
+      "subtotal": 44000,
+      "delivery": {
+        "type": "pickup",
+        "price": 0
+      },
+      "customer": {
+        "name": "pepe",
+        "phone": "3147280278",
+        "address": "RECOGE EN PUNTO",
+        "neighborhood": "RECOGE EN PUNTO",
+        "notes": "que sea todo al clima. No  frío"
+      },
+      "paymentMethod": "pay_at_store",
+      "total": 44000,
+      "createdAt": 1786481444277
+    },
+    {
+      "orderNumber": "0033",
+      "userId": "153583936872693@lid",
+      "status": "confirmed",
+      "items": [
+        {
+          "productId": "SAL008",
+          "categoryId": "salchipapas",
+          "categoryName": "Salchipapas",
+          "emoji": "🍟",
+          "name": "Grande con Todo",
+          "unitPrice": 30000,
+          "quantity": 1,
+          "total": 30000
+        },
+        {
+          "productId": "SAL006",
+          "categoryId": "salchipapas",
+          "categoryName": "Salchipapas",
+          "emoji": "🍟",
+          "name": "Grande con Carne de Hamburguesa",
+          "unitPrice": 22000,
+          "quantity": 1,
+          "total": 22000
+        }
+      ],
+      "subtotal": 52000,
+      "delivery": {
+        "type": "delivery",
+        "price": 3000
+      },
+      "customer": {
+        "name": "David",
+        "phone": "3046317853",
+        "address": "Calle 85 # 56-52",
+        "neighborhood": "Viviendas del sur",
+        "notes": "SIN OBSERVACIONES"
+      },
+      "paymentMethod": "cash_on_delivery",
+      "total": 55000,
+      "createdAt": 1786482169207
     }
   ]
 }
