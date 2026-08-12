@@ -13,6 +13,10 @@ const checkoutService = require(
     "../../services/checkout/checkoutService"
 );
 
+const cartService = require(
+    "../../services/cart/cartService"
+);
+
 function handleCheckout(
     userId,
     text,
@@ -222,9 +226,24 @@ if (
     "ASK_NEIGHBORHOOD"
 ) {
 
+    const neighborhood =
+        text.trim();
+
+    if (
+        neighborhood.length < 3 ||
+        /^\d+$/.test(neighborhood)
+    ) {
+
+        return (
+            "❌ Barrio inválido.\n\n" +
+            "Ejemplo: Belén, Calasanz, Laureles, La Mota."
+        );
+
+    }
+
     customerDataService.setNeighborhood(
         userId,
-        text
+        neighborhood
     );
 
     sessionStorage.updateSession(
@@ -256,31 +275,32 @@ if (
             : text
     );
 
-    const result =
-        orderService.confirmOrder(
-            userId
-        );
-
-    if (!result.ok) {
-
-        return (
-            "❌ Error al registrar el pedido.\n\n" +
-            result.message
-        );
-
-    }
-
     sessionStorage.updateSession(
         userId,
         {
-            state: "MAIN_MENU"
+            state: "CONFIRM_ORDER"
         }
     );
+
+    const customer =
+        customerDataService.getCustomerData(
+            userId
+        );
+
+    const cart =
+        cartService.getCart(
+            userId
+        );
+
+    const subtotal =
+        cartService.getSubtotal(
+            userId
+        );
 
     let orderSummary =
         "🛒 Resumen del pedido\n\n";
 
-    result.order.items.forEach(
+    cart.items.forEach(
         item => {
 
             orderSummary +=
@@ -294,25 +314,39 @@ if (
     let notesText = "";
 
     if (
-        result.order.customer &&
-        result.order.customer.notes &&
-        result.order.customer.notes !==
+        customer.notes &&
+        customer.notes !==
         "SIN OBSERVACIONES"
     ) {
 
         notesText =
-            `📝 Observaciones: ${result.order.customer.notes}\n\n`;
+            `📝 Observaciones: ${customer.notes}\n\n`;
 
     }
 
     return (
-        "✅ Pedido registrado correctamente\n\n" +
-        `📦 Pedido #${result.order.orderNumber}\n\n` +
+        "📋 *CONFIRMAR PEDIDO*\n\n" +
+
+        `👤 Nombre: ${customer.name}\n` +
+        `📱 Teléfono: ${customer.phone}\n` +
+        `📍 Dirección: ${customer.address}\n` +
+        `🏘️ Barrio: ${customer.neighborhood}\n\n` +
+
+        "━━━━━━━━━━━━━━\n\n" +
+
         orderSummary +
-        `💰 Total: $${result.order.total.toLocaleString("es-CO")}\n\n` +
+
         notesText +
-        "🚚 Domicilio\n\n" +
-        "Muy pronto uno de nuestros asesores te contactará."
+
+        `💰 Subtotal: $${subtotal.toLocaleString("es-CO")}\n` +
+        "🚚 Domicilio: $3.000\n\n" +
+        `💵 TOTAL: $${(subtotal + 3000).toLocaleString("es-CO")}\n\n` +
+
+        "━━━━━━━━━━━━━━\n\n" +
+
+        "1️⃣ ✅ Confirmar pedido\n\n" +
+        "2️⃣ ✏️ Modificar datos\n\n" +
+        "0️⃣ ❌ Cancelar pedido"
     );
 
 }
@@ -321,43 +355,40 @@ if (
 // OBSERVACIONES RECOGER EN PUNTO
 // ======================================
 
-
 if (
     session.state ===
     "ASK_NOTES_PICKUP"
 ) {
 
-customerDataService.setNotes(
-    userId,
-    text.trim().toUpperCase() === "NO"
-        ? "SIN OBSERVACIONES"
-        : text
-);
-    const result =
-        orderService.confirmOrder(
-            userId
-        );
-
-    if (!result.ok) {
-
-        return (
-            "❌ Error al registrar el pedido.\n\n" +
-            result.message
-        );
-
-    }
+    customerDataService.setNotes(
+        userId,
+        text.trim().toUpperCase() === "NO"
+            ? "SIN OBSERVACIONES"
+            : text
+    );
 
     sessionStorage.updateSession(
         userId,
         {
-            state: "MAIN_MENU"
+            state: "CONFIRM_ORDER"
         }
     );
+
+    const cart =
+        cartService.getCart(userId);
+
+    const subtotal =
+        cartService.getSubtotal(userId);
+
+    const customer =
+        customerDataService.getCustomerData(
+            userId
+        );
 
     let orderSummary =
         "🛒 Resumen del pedido\n\n";
 
-    result.order.items.forEach(
+    cart.items.forEach(
         item => {
 
             orderSummary +=
@@ -368,29 +399,208 @@ customerDataService.setNotes(
 
     orderSummary += "\n";
 
-let notesText = "";
+    let notesText = "";
 
-if (
-    result.order.customer &&
-    result.order.customer.notes &&
-    result.order.customer.notes !==
-    "SIN OBSERVACIONES"
-) {
+    if (
+        customer.notes &&
+        customer.notes !==
+        "SIN OBSERVACIONES"
+    ) {
 
-    notesText =
-        `📝 Observaciones: ${result.order.customer.notes}\n\n`;
+        notesText =
+            `📝 Observaciones: ${customer.notes}\n\n`;
+
+    }
+
+    return (
+        "📋 *CONFIRMAR PEDIDO*\n\n" +
+
+        `👤 Nombre: ${customer.name}\n` +
+        `📱 Teléfono: ${customer.phone}\n\n` +
+
+        "━━━━━━━━━━━━━━\n\n" +
+
+        orderSummary +
+
+        notesText +
+
+        `💰 TOTAL: $${subtotal.toLocaleString("es-CO")}\n\n` +
+
+        "━━━━━━━━━━━━━━\n\n" +
+
+        "1️⃣ ✅ Confirmar pedido\n\n" +
+        "2️⃣ ✏️ Modificar datos\n\n" +
+        "0️⃣ ❌ Cancelar pedido"
+    );
 
 }
 
-return (
-    "✅ Pedido registrado correctamente\n\n" +
-    `📦 Pedido #${result.order.orderNumber}\n\n` +
-    orderSummary +
-    `💰 Total: $${result.order.total.toLocaleString("es-CO")}\n\n` +
-    notesText +
-    "📍 Recoger en punto\n\n" +
-    "Tu pedido quedará listo para recoger."
-);
+// ======================================
+// CONFIRMAR PEDIDO
+// ======================================
+
+if (
+    session.state ===
+    "CONFIRM_ORDER"
+)
+
+{
+
+    if (text === "1") {
+
+        const result =
+            orderService.confirmOrder(
+                userId
+            );
+
+        if (!result.ok) {
+
+            return (
+                "❌ Error al registrar el pedido.\n\n" +
+                result.message
+            );
+
+        }
+
+        sessionStorage.updateSession(
+            userId,
+            {
+                state: "MAIN_MENU"
+            }
+        );
+
+        let orderSummary =
+            "🛒 Resumen del pedido\n\n";
+
+        result.order.items.forEach(
+            item => {
+
+                orderSummary +=
+                    `${item.quantity}x [${item.categoryName}] ${item.name}\n`;
+
+            }
+        );
+
+        orderSummary += "\n";
+
+        let notesText = "";
+
+        if (
+            result.order.customer &&
+            result.order.customer.notes &&
+            result.order.customer.notes !==
+            "SIN OBSERVACIONES"
+        ) {
+
+            notesText =
+                `📝 Observaciones: ${result.order.customer.notes}\n\n`;
+
+        }
+
+        let deliveryText = "";
+
+        if (
+            result.order.delivery &&
+            result.order.delivery.type ===
+            "delivery"
+        ) {
+
+            deliveryText =
+                "🚚 Domicilio\n" +
+                `📍 Dirección: ${result.order.customer.address}\n` +
+                `🏘️ Barrio: ${result.order.customer.neighborhood}\n\n`;
+
+        }
+        else {
+
+            deliveryText =
+                "📍 Recoger en punto\n\n";
+
+        }
+
+        return (
+            "✅ Pedido registrado correctamente\n\n" +
+
+            `📦 Pedido #${result.order.orderNumber}\n\n` +
+
+            `👤 Nombre: ${result.order.customer.name}\n` +
+            `📱 Teléfono: ${result.order.customer.phone}\n\n` +
+
+orderSummary +
+
+(
+    result.order.delivery &&
+    result.order.delivery.type === "delivery"
+
+        ? (
+            `💰 Subtotal: $${result.order.subtotal.toLocaleString("es-CO")}\n` +
+            `🚚 Domicilio: $${result.order.delivery.price.toLocaleString("es-CO")}\n\n` +
+            `💵 TOTAL: $${result.order.total.toLocaleString("es-CO")}\n\n`
+        )
+
+        : (
+            `💵 TOTAL: $${result.order.total.toLocaleString("es-CO")}\n\n`
+        )
+) +
+
+notesText +
+
+            deliveryText +
+
+            (
+                result.order.delivery &&
+                result.order.delivery.type ===
+                "delivery"
+                    ? "Muy pronto uno de nuestros asesores te contactará."
+                    : "Tu pedido quedará listo para recoger."
+            )
+        );
+
+    }
+
+    if (text === "2") {
+
+        sessionStorage.updateSession(
+            userId,
+            {
+                state: "ASK_NAME"
+            }
+        );
+
+        return (
+            "✏️ Modificación de datos\n\n" +
+            "👤 Escribe nuevamente tu nombre:"
+        );
+
+    }
+
+if (text === "0") {
+
+    checkoutService.cancelCheckout(
+        userId
+    );
+
+    cartService.clearCart(
+        userId
+    );
+
+    sessionStorage.updateSession(
+        userId,
+        {
+            state: "MAIN_MENU"
+        }
+    );
+
+    return (
+        "❌ Pedido cancelado.\n\n" +
+        "🛒 El carrito fue vaciado correctamente."
+    );
+
+}
+
+    return (
+        "❌ Selecciona 1, 2 o 0."
+    );
 
 }
 

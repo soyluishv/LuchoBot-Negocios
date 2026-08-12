@@ -32,3 +32,116 @@ Tu mensaje de nuevo pedido quedará así:
 
 ✅ OK 0010
 ❌ CANCELAR 0010
+
+
+🤖 Bot de WhatsApp para Rapi Crock's
+
+Automatiza la toma de pedidos por WhatsApp las 24 horas.
+
+Funciones actuales
+
+✅ Menú digital organizado por categorías
+
+Chuzos
+Perros
+Arepaburguer
+Alas
+Salchipapas
+Hamburguesas
+Bebidas
+Adiciones
+
+✅ Carrito de compras
+
+El cliente puede:
+
+Agregar productos
+Ver carrito
+Cambiar cantidades
+Eliminar productos
+Continuar comprando
+
+✅ Pedido por domicilio
+
+Solicita:
+
+Nombre
+Teléfono
+Dirección
+Barrio
+Observaciones
+
+✅ Pedido para recoger en el local
+
+Solicita:
+
+Nombre
+Teléfono
+Observaciones
+
+Sin pedir dirección innecesaria.
+
+✅ Observaciones personalizadas
+
+Ejemplos:
+
+Sin tomate
+Poca salsa
+Todo al clima
+Sin cebolla
+
+Aparecen tanto para el cliente como para el administrador.
+
+✅ Notificación automática al negocio
+
+Cuando llega un pedido:
+
+🔔 NUEVO PEDIDO
+
+📦 Pedido #0032
+
+👤 Pepe
+📱 3147280278
+
+🍔 Productos
+
+1x Hit 400 ml
+5x Coca-Cola 1.5 L
+
+💰 Total: $44.000
+
+📝 Todo al clima
+
+📍 Recoger en punto
+
+✅ Numeración automática
+
+Pedido #0001
+Pedido #0002
+Pedido #0003
+...
+
+✅ Panel administrativo por WhatsApp
+
+Comandos disponibles:
+
+📦 PENDIENTES
+📊 VENTAS
+📚 HISTORIAL
+🔎 BUSCAR 0001
+✅ OK 0001
+❌ CANCELAR 0001
+Beneficio para el negocio
+
+En vez de esto:
+
+Cliente:
+¿Cuánto vale una hamburguesa?
+
+Cliente:
+¿Qué bebidas tienen?
+
+Cliente:
+¿Cuánto cuesta el domicilio?
+
+El cliente hace todo solo desde el menú y el negocio recibe el pedido listo para preparar.

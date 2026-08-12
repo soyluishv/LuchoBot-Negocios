@@ -84,12 +84,6 @@ const category =
         product.categoryId
     );
 
-if (existingItem) {
-
-    existingItem.quantity += quantity;
-
-} else {
-
     cart.items.push({
         productId: product.id,
         categoryId: product.categoryId,
@@ -99,8 +93,6 @@ if (existingItem) {
         unitPrice: product.price,
         quantity
     });
-
-}
 
 }
 

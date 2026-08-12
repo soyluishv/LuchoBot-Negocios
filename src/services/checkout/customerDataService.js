@@ -214,6 +214,27 @@ function setNotes(userId, notes) {
 }
 
 // ==========================================
+// OBTENER DATOS DEL CLIENTE
+// ==========================================
+
+function getCustomerData(userId) {
+
+    const checkout =
+        checkoutService.getCheckout(
+            userId
+        );
+
+    if (!checkout) {
+
+        return null;
+
+    }
+
+    return checkout.customer;
+
+}
+
+// ==========================================
 // VALIDAR DATOS REQUERIDOS
 // ==========================================
 
@@ -297,6 +318,7 @@ module.exports = {
     setAddress,
     setNeighborhood,
     setNotes,
+    getCustomerData,
     validateCustomerData
 
 };

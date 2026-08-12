@@ -257,6 +257,32 @@ if (
     "SELECTING_QUANTITY_PRODUCT"
 ) {
 
+    if (text === "0") {
+
+        sessionStorage.updateSession(
+            userId,
+            {
+                state: "VIEWING_CART"
+            }
+        );
+
+        const cart =
+            cartService.getCart(
+                userId
+            );
+
+        const subtotal =
+            cartService.getSubtotal(
+                userId
+            );
+
+        return cartTemplate.formatCart(
+            cart,
+            subtotal
+        );
+
+    }
+
     const position =
         parseInt(text, 10);
 
@@ -268,9 +294,10 @@ if (
 
     if (!item) {
 
-        return (
-            "❌ Producto inválido.\n\n" +
-            "👇 Escribe un número válido"
+return (
+    "🔢 *NUEVA CANTIDAD*\n\n" +
+    "0️⃣ Cancelar\n\n" +
+    "👇 Escribe la nueva cantidad"
         );
 
     }
@@ -361,6 +388,32 @@ if (
     session.state ===
     "REMOVING_PRODUCT"
 ) {
+
+if (text === "0") {
+
+    sessionStorage.updateSession(
+        userId,
+        {
+            state: "VIEWING_CART"
+        }
+    );
+
+    const cart =
+        cartService.getCart(
+            userId
+        );
+
+    const subtotal =
+        cartService.getSubtotal(
+            userId
+        );
+
+    return cartTemplate.formatCart(
+        cart,
+        subtotal
+    );
+
+}
 
     const position =
         parseInt(text, 10);

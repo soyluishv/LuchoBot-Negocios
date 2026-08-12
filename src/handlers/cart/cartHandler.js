@@ -55,20 +55,24 @@ if (text === "2") {
     cart.items.forEach(
         (item, index) => {
 
-            message +=
-                `${index + 1}️⃣ ${item.name}\n`;
+message +=
+    `${index + 1}️⃣ ${item.emoji} [${item.categoryName}]\n` +
+    `${item.name}\n\n`;
 
         }
     );
 
-    message +=
-        "\n👇 Escribe el número del producto";
+message +=
+    "\n0️⃣ Volver al carrito\n\n" +
+    "👇 Escribe el número del producto";
 
     return message;
 
 }
 
-if (text === "3") {
+if (text === "3") 
+    
+    {
 
     const cart =
         cartService.getCart(
@@ -92,22 +96,24 @@ if (text === "3") {
         }
     );
 
-    let message =
-        "🗑️ *ELIMINAR PRODUCTO*\n\n";
+let message =
+    "🗑️ *ELIMINAR PRODUCTO*\n\n";
 
-    cart.items.forEach(
-        (item, index) => {
+cart.items.forEach(
+    (item, index) => {
 
-            message +=
-                `${index + 1}️⃣ ${item.name}\n`;
+message +=
+    `${index + 1}️⃣ ${item.emoji} [${item.categoryName}]\n` +
+    `${item.name}\n\n`;
 
-        }
-    );
+    }
+);
 
-    message +=
-        "\n👇 Escribe el número del producto";
+message +=
+    "\n0️⃣ Volver al carrito\n\n" +
+    "👇 Escribe el número del producto";
 
-    return message;
+return message;
 
 }
 
@@ -128,20 +134,39 @@ if (text === "3") {
 
     }
 
-    if (text === "0") {
+if (text === "0") {
 
-        sessionStorage.updateSession(
-            userId,
-            {
-                state: "MAIN_MENU"
-            }
-        );
+    cartService.clearCart(
+        userId
+    );
 
-        return (
-            "🏠 Regresando al menú principal..."
-        );
+    sessionStorage.updateSession(
+        userId,
+        {
+            state: "MAIN_MENU"
+        }
+    );
 
-    }
+    return (
+        "❌ Pedido cancelado.\n\n" +
+        "🛒 El carrito fue vaciado correctamente.\n\n" +
+
+        "🔥🍔 *RAPI CROCK'S* 🍔🔥\n\n" +
+
+        "━━━━━━━━━━━━━━━━━━\n\n" +
+
+        "1️⃣ 🍔 Ver Menú\n\n" +
+
+        "2️⃣ 🛒 Ver Carrito\n\n" +
+
+        "3️⃣ ✅ Finalizar Pedido\n\n" +
+
+        "━━━━━━━━━━━━━━━━━━\n\n" +
+
+        "👇 Responde con una opción"
+    );
+
+}
 
     return "❌ Opción no válida.";
 

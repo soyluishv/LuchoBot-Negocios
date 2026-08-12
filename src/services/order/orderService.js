@@ -45,6 +45,18 @@ function confirmOrder(userId) {
     const cart =
         cartService.getCart(userId);
 
+    console.log(
+        "CARRITO ANTES DE CREAR PEDIDO:"
+    );
+
+    console.log(
+        JSON.stringify(
+            cart,
+            null,
+            2
+        )
+    );
+
     const checkout =
         checkoutService.getCheckout(userId);
 
