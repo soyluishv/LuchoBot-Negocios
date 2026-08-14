@@ -1,3 +1,42 @@
+/**
+ * ==========================================
+ * LuchoBot Negocios
+ * Versión: 1.0.0
+ * Archivo: adminPanelService.js
+ * Módulo: Administración
+ *
+ * Descripción:
+ * Procesa todos los comandos enviados
+ * por el administrador del negocio.
+ *
+ * Responsabilidades:
+ * - Ver pedidos pendientes
+ * - Consultar ventas
+ * - Consultar historial
+ * - Buscar pedidos
+ * - Ejecutar acciones administrativas
+ *
+ * Importante:
+ * Solo debe ser utilizado por números
+ * autorizados como administradores.
+ *
+ * ==========================================
+ */
+
+// ==========================================
+// DEPENDENCIAS DEL PANEL ADMIN
+//
+// orderStatus
+// Etiquetas visuales de estados.
+//
+// adminCommandService
+// Ejecuta acciones administrativas.
+//
+// adminReportService
+// Genera reportes y consultas.
+//
+// ==========================================
+
 const {
     getStatusLabel
 } = require(
@@ -11,6 +50,71 @@ const adminReportService = require(
     "./adminReportService"
 );
 
+// ==========================================
+// PARSEAR FECHA DD/MM/YYYY
+//
+// Convierte texto a objeto Date.
+//
+// Ejemplo:
+//
+// 13/08/2026
+//
+// ==========================================
+
+function parseDate(dateString) {
+
+    const parts =
+        dateString.split("/");
+
+    if (parts.length !== 3) {
+
+        return null;
+
+    }
+
+    const day =
+        Number(parts[0]);
+
+    const month =
+        Number(parts[1]) - 1;
+
+    const year =
+        Number(parts[2]);
+
+    return new Date(
+        year,
+        month,
+        day,
+        0,
+        0,
+        0,
+        0
+    );
+
+}
+// ==========================================
+// PROCESADOR DE MENSAJES ADMIN
+//
+// Recibe:
+//
+// message
+// Texto enviado por el administrador.
+//
+// Función:
+//
+// Identificar el comando recibido
+// y ejecutar la acción correspondiente.
+//
+// Ejemplos:
+//
+// PENDIENTES
+// VENTAS
+// HISTORIAL
+// BUSCAR 0001
+// OK 0001
+//
+// ==========================================
+
 function processAdminMessage(message) {
 
     const text = message
@@ -19,9 +123,22 @@ function processAdminMessage(message) {
     const upperText = text
         .toUpperCase();
 
-    // ==========================
-    // REPORTES
-    // ==========================
+// ==========================================
+// COMANDO: PENDIENTES
+//
+// Muestra todos los pedidos
+// que aún no han sido entregados
+// ni cancelados.
+//
+// Incluye:
+//
+// - Cliente
+// - Productos
+// - Dirección
+// - Observaciones
+// - Tiempo de espera
+//
+// ==========================================
 
     if (upperText === "PENDIENTES") {
 
@@ -47,12 +164,32 @@ function processAdminMessage(message) {
             pendingOrders.forEach(
                 order => {
 
+// ==========================================
+// CALCULAR TIEMPO DE ESPERA
+//
+// Determina cuántos minutos lleva
+// el pedido pendiente.
+//
+// Se utiliza para mostrar alertas
+// visuales al administrador.
+//
+// ==========================================
+
             const waitingMinutes =
             Math.floor(
             (Date.now() - order.createdAt) /
             60000
             );
 
+// ==========================================
+// SEMÁFORO DE ATENCIÓN
+//
+// 🟢 Menos de 30 min
+// 🟡 Entre 30 y 59 min
+// 🔴 60 min o más
+//
+// ==========================================
+            
 let waitingIndicator =
     "🟢";
 
@@ -132,36 +269,266 @@ response +=
 
     }
 
-if (upperText === "VENTAS") {
+// ==========================
+// VENTAS
+//
+// Propósito:
+//
+// Mostrar métricas comerciales
+// relevantes para el administrador.
+//
+// Información:
+//
+// - Pedidos entregados
+// - Valor neto vendido
+// - Domicilios realizados
+// - Valor generado por domicilios
+// - Pedidos recogidos en punto
+// - Producto más vendido
+//
+// ==========================
+
+if (
+    upperText.startsWith(
+        "VENTAS"
+    )
+) {
+
+    const parts =
+        text.trim().split(" ");
+
+    // ======================
+    // REPORTE GENERAL
+    // ======================
+
+if (parts.length === 1) {
+
+        const report =
+            adminReportService
+                .getAdvancedSalesReport();
+
+        return {
+
+            success: true,
+
+            message:
+                "📊 REPORTE DE VENTAS\n\n" +
+
+                `📦 Pedidos entregados: ${report.deliveredOrders}\n\n` +
+
+                `💰 Valor neto vendido:\n` +
+                `$${report.totalSales.toLocaleString("es-CO")}\n\n` +
+
+                "━━━━━━━━━━━\n\n" +
+
+                `🏠 Domicilios: ${report.deliveryCount}\n` +
+                `💵 Valor domicilios: $${report.deliverySales.toLocaleString("es-CO")}\n\n` +
+
+                `🛍️ Recoger en punto: ${report.pickupCount}\n` +
+                `💵 Valor recoger en punto: $${report.pickupSales.toLocaleString("es-CO")}\n\n` +
+
+                "━━━━━━━━━━━\n\n" +
+
+                `🏆 Producto más vendido:\n` +
+                `${report.topProduct} (${report.topQuantity})`
+
+        };
+
+    }
+
+    // ======================
+    // VENTAS DE UN SOLO DÍA
+    // ======================
+
+if (parts.length === 2) {
+
+    const startDate =
+        parseDate(parts[1]);
+
+    if (!startDate) {
+
+        return {
+
+            success: false,
+
+            message:
+                "❌ Fecha inválida.\n\n" +
+                "Formato:\n" +
+                "VENTAS 13/08/2026"
+
+        };
+
+    }
+
+    const endDate =
+        new Date(startDate);
+
+    endDate.setHours(
+        23,
+        59,
+        59,
+        999
+    );
 
     const report =
         adminReportService
-            .getSalesReport();
+            .getAdvancedSalesReportByDateRange(
+                startDate,
+                endDate
+            );
 
     return {
 
         success: true,
 
         message:
-            "📊 REPORTE DE VENTAS\n\n" +
+            `📅 VENTAS DEL ${parts[1]}\n\n` +
 
-            `📦 Pedidos totales: ${report.totalOrders}\n` +
+            `📦 Pedidos entregados: ${report.deliveredOrders}\n\n` +
 
-            `💰 Ventas totales: $${report.totalSales.toLocaleString("es-CO")}\n\n` +
+            `💰 Valor neto vendido:\n` +
+            `$${report.totalSales.toLocaleString("es-CO")}\n\n` +
 
-            `✅ Entregados: ${report.delivered}\n` +
+            "━━━━━━━━━━━\n\n" +
 
-            `⏳ Pendientes: ${report.pending}\n` +
+            `🏠 Domicilios: ${report.deliveryCount}\n` +
+            `💵 Valor domicilios: $${report.deliverySales.toLocaleString("es-CO")}\n\n` +
 
-            `❌ Cancelados: ${report.cancelled}`
+            `🛍️ Recoger en punto: ${report.pickupCount}\n` +
+            `💵 Valor recoger en punto: $${report.pickupSales.toLocaleString("es-CO")}\n\n` +
+
+            "━━━━━━━━━━━\n\n" +
+
+            `🏆 Producto más vendido:\n` +
+            `${report.topProduct} (${report.topQuantity})`
 
     };
 
 }
 
 // ==========================
-// AYUDA
+// VENTAS ENTRE FECHAS
+//
+// Permite consultar un período
+// completo.
+//
+// Formato:
+//
+// VENTAS DD/MM/YYYY DD/MM/YYYY
+//
+// Ejemplo:
+//
+// VENTAS 10/08/2026 13/08/2026
+//
 // ==========================
+
+if (parts.length === 3) {
+
+    const startDate =
+        parseDate(parts[1]);
+
+    const endDate =
+        parseDate(parts[2]);
+
+    if (
+        !startDate ||
+        !endDate
+    ) {
+
+        return {
+
+            success: false,
+
+            message:
+                "❌ Fecha inválida.\n\n" +
+                "Formato correcto:\n" +
+                "VENTAS 10/08/2026 13/08/2026"
+
+        };
+
+    }
+
+    // ======================================
+    // VALIDAR ORDEN DE FECHAS
+    // ======================================
+
+    if (
+        startDate > endDate
+    ) {
+
+        return {
+
+            success: false,
+
+            message:
+                "❌ La fecha inicial no puede ser\n" +
+                "posterior a la fecha final."
+
+        };
+
+    }
+
+    // ======================================
+    // INCLUIR TODO EL DÍA FINAL
+    // ======================================
+
+    endDate.setHours(
+        23,
+        59,
+        59,
+        999
+    );
+
+    const report =
+        adminReportService
+            .getAdvancedSalesReportByDateRange(
+                startDate,
+                endDate
+            );
+
+    return {
+
+        success: true,
+
+        message:
+            `📊 REPORTE DE VENTAS\n\n` +
+
+            `📅 Desde: ${parts[1]}\n` +
+            `📅 Hasta: ${parts[2]}\n\n` +
+
+            `📦 Pedidos entregados: ${report.deliveredOrders}\n\n` +
+
+            `💰 Valor neto vendido:\n` +
+            `$${report.totalSales.toLocaleString("es-CO")}\n\n` +
+
+            "━━━━━━━━━━━\n\n" +
+
+            `🏠 Domicilios: ${report.deliveryCount}\n` +
+            `💵 Valor domicilios: $${report.deliverySales.toLocaleString("es-CO")}\n\n` +
+
+            `🛍️ Recoger en punto: ${report.pickupCount}\n` +
+            `💵 Valor recoger en punto: $${report.pickupSales.toLocaleString("es-CO")}\n\n` +
+
+            "━━━━━━━━━━━\n\n" +
+
+            `🏆 Producto más vendido:\n` +
+            `${report.topProduct} (${report.topQuantity})`
+
+    };
+
+}
+}
+
+// ==========================================
+// COMANDO: AYUDA
+//
+// Muestra los comandos disponibles
+// para administrar el negocio.
+//
+// Funciona como menú principal
+// del panel administrativo.
+//
+// ==========================================
 
 if (upperText === "AYUDA") {
 
@@ -183,9 +550,19 @@ if (upperText === "AYUDA") {
 
 }
 
-// ==========================
-// HISTORIAL
-// ==========================
+// ==========================================
+// COMANDO: HISTORIAL
+//
+// Muestra los pedidos entregados
+// registrados en el sistema.
+//
+// Incluye:
+//
+// - Número de pedido
+// - Valor vendido
+// - Total acumulado
+//
+// ==========================================
 
 if (upperText === "HISTORIAL") {
 
@@ -242,6 +619,18 @@ response +=
     };
 
 }
+
+// ==========================================
+// COMANDO: BUSCAR
+//
+// Permite localizar un pedido
+// específico mediante su número.
+//
+// Ejemplo:
+//
+// BUSCAR 0001
+//
+// ==========================================
 
 if (
     upperText.startsWith(
@@ -306,16 +695,34 @@ order.items.forEach(
 
     }
 
-    // ==========================
-    // COMANDOS
-    // ==========================
+// ==========================================
+// COMANDOS ADMINISTRATIVOS SECUNDARIOS
+//
+// Delega los comandos administrativos
+// que no son procesados directamente
+// por este servicio.
+//
+// Ejemplos:
+//
+// OK 0001
+// CANCELAR 0001
+//
+// ==========================================
 
     return adminCommandService
         .processAdminCommand(
             upperText
         );
+   }
 
-}
+// ==========================================
+// API PÚBLICA DEL PANEL ADMIN
+//
+// Punto principal de entrada
+// para la administración
+// del negocio.
+//
+// ==========================================
 
 module.exports = {
 

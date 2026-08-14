@@ -3,15 +3,63 @@
  * LuchoBot Negocios
  * Versión: 1.0.0
  * Archivo: customerDataService.js
+ * Módulo: Datos del Cliente
+ *
+ * Descripción:
+ * Gestiona la captura, validación y
+ * almacenamiento temporal de los datos
+ * del cliente durante el proceso de compra.
+ *
+ * Responsabilidades:
+ * - Guardar nombre
+ * - Guardar teléfono
+ * - Guardar dirección
+ * - Guardar barrio
+ * - Guardar observaciones
+ * - Validar datos requeridos
+ *
+ * Tipo de almacenamiento:
+ * Temporal (checkout activo)
+ *
+ * Importante:
+ * Este módulo NO guarda pedidos.
+ *
+ * Solamente administra los datos del
+ * cliente mientras se completa el checkout.
+ *
  * ==========================================
  */
+
+// ==========================================
+// DEPENDENCIAS DEL SISTEMA
+//
+// Servicios utilizados para acceder
+// al checkout activo del cliente.
+//
+// ==========================================
 
 const checkoutService = require(
     "./checkoutService"
 );
 
 // ==========================================
-// NORMALIZAR TEXTO
+// LIMPIAR Y NORMALIZAR TEXTO
+//
+// Elimina:
+//
+// - Espacios iniciales
+// - Espacios finales
+//
+// Evita almacenar datos inconsistentes.
+//
+// Ejemplo:
+//
+// "   Luis   "
+//
+// Resultado:
+//
+// "Luis"
+//
 // ==========================================
 
 function normalizeText(value) {
@@ -25,7 +73,13 @@ function normalizeText(value) {
 }
 
 // ==========================================
-// GUARDAR NOMBRE
+// REGISTRAR NOMBRE DEL CLIENTE
+//
+// Valida y almacena el nombre que será
+// utilizado para identificar el pedido.
+//
+// Campo obligatorio.
+//
 // ==========================================
 
 function setName(userId, name) {
@@ -64,7 +118,14 @@ function setName(userId, name) {
 }
 
 // ==========================================
-// GUARDAR TELÉFONO
+// REGISTRAR TELÉFONO DEL CLIENTE
+//
+// Permite almacenar el número de contacto
+// para confirmar pedidos o resolver
+// novedades.
+//
+// Campo obligatorio.
+//
 // ==========================================
 
 function setPhone(userId, phone) {
@@ -103,7 +164,13 @@ function setPhone(userId, phone) {
 }
 
 // ==========================================
-// GUARDAR DIRECCIÓN
+// REGISTRAR DIRECCIÓN DE ENTREGA
+//
+// Utilizada únicamente cuando el cliente
+// selecciona domicilio.
+//
+// Campo obligatorio para delivery.
+//
 // ==========================================
 
 function setAddress(userId, address) {
@@ -142,7 +209,13 @@ function setAddress(userId, address) {
 }
 
 // ==========================================
-// GUARDAR BARRIO / SECTOR
+// REGISTRAR BARRIO O SECTOR
+//
+// Permite identificar la zona donde será
+// entregado el pedido.
+//
+// Campo obligatorio para delivery.
+//
 // ==========================================
 
 function setNeighborhood(userId, neighborhood) {
@@ -184,7 +257,17 @@ function setNeighborhood(userId, neighborhood) {
 }
 
 // ==========================================
-// GUARDAR INDICACIONES
+// REGISTRAR OBSERVACIONES DEL PEDIDO
+//
+// Ejemplos:
+//
+// - Sin cebolla
+// - Sin tomate
+// - Poco picante
+// - Llamar al llegar
+//
+// Campo opcional.
+//
 // ==========================================
 
 function setNotes(userId, notes) {
@@ -214,7 +297,21 @@ function setNotes(userId, notes) {
 }
 
 // ==========================================
-// OBTENER DATOS DEL CLIENTE
+// CONSULTAR DATOS DEL CLIENTE
+//
+// Obtiene la información almacenada
+// durante el checkout actual.
+//
+// Retorna:
+//
+// {
+//   name,
+//   phone,
+//   address,
+//   neighborhood,
+//   notes
+// }
+//
 // ==========================================
 
 function getCustomerData(userId) {
@@ -235,7 +332,25 @@ function getCustomerData(userId) {
 }
 
 // ==========================================
-// VALIDAR DATOS REQUERIDOS
+// VALIDAR INFORMACIÓN DEL CLIENTE
+//
+// Verifica que todos los campos
+// obligatorios estén completos.
+//
+// Reglas:
+//
+// Recoger en punto:
+//
+// ✔ Nombre
+// ✔ Teléfono
+//
+// Domicilio:
+//
+// ✔ Nombre
+// ✔ Teléfono
+// ✔ Dirección
+// ✔ Barrio
+//
 // ==========================================
 
 function validateCustomerData(userId) {
@@ -274,8 +389,14 @@ function validateCustomerData(userId) {
 
     }
 
-    // Dirección y barrio solamente son
-    // obligatorios cuando es domicilio.
+// ==========================================
+// VALIDACIONES ESPECÍFICAS PARA DOMICILIO
+//
+// Dirección y barrio únicamente son
+// obligatorios cuando el cliente solicita
+// entrega a domicilio.
+//
+// ==========================================
 
     if (checkout.deliveryType === "delivery") {
 
@@ -308,7 +429,11 @@ function validateCustomerData(userId) {
 }
 
 // ==========================================
-// EXPORTAR
+// API PÚBLICA DE DATOS DEL CLIENTE
+//
+// Funciones disponibles para captura,
+// consulta y validación de información.
+//
 // ==========================================
 
 module.exports = {

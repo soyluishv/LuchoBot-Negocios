@@ -3,8 +3,48 @@
  * LuchoBot Negocios
  * Versión: 1.0.0
  * Archivo: orderService.js
+ * Módulo: Gestión de Pedidos
+ *
+ * Descripción:
+ * Este servicio controla todo el ciclo de
+ * vida de los pedidos realizados por los
+ * clientes.
+ *
+ * Responsabilidades:
+ * - Validar pedidos
+ * - Crear pedidos oficiales
+ * - Generar consecutivos
+ * - Calcular totales
+ * - Guardar pedidos
+ * - Consultar historial
+ * - Notificar nuevos pedidos al administrador
+ *
+ * Dependencias:
+ * - cartService
+ * - checkoutService
+ * - customerDataService
+ * - orderStorage
+ * - adminNotificationService
+ *
+ * Adaptable para:
+ * - Restaurantes
+ * - Comida rápida
+ * - Tiendas de ropa
+ * - Zapaterías
+ * - Cosméticos
+ * - Cualquier negocio con catálogo
+ *
  * ==========================================
  */
+
+
+
+// ==========================================
+// IMPORTACIÓN DE DEPENDENCIAS
+//
+// Servicios necesarios para construir,
+// validar, almacenar y notificar pedidos.
+// ==========================================
 
 const cartService = require(
     "../cart/cartService"
@@ -27,7 +67,19 @@ const adminNotificationService = require(
 );
 
 // ==========================================
-// GENERAR NÚMERO DE PEDIDO
+// GENERAR CONSECUTIVO DE PEDIDO
+//
+// Propósito:
+// Obtener el siguiente número disponible
+// para identificar un pedido.
+//
+// Ejemplos:
+// 0001
+// 0002
+// 0003
+//
+// Retorna:
+// String
 // ==========================================
 
 function generateOrderNumber() {
@@ -38,6 +90,30 @@ function generateOrderNumber() {
 
 // ==========================================
 // CONFIRMAR PEDIDO
+//
+// Propósito:
+// Convertir el carrito temporal del cliente
+// en un pedido oficial.
+//
+// Flujo:
+//
+// 1. Obtener carrito
+// 2. Obtener checkout
+// 3. Validar información
+// 4. Calcular totales
+// 5. Crear pedido
+// 6. Guardar pedido
+// 7. Notificar administrador
+// 8. Limpiar carrito
+//
+// Entrada:
+// userId
+//
+// Retorna:
+// {
+//   ok,
+//   order
+// }
 // ==========================================
 
 function confirmOrder(userId) {
@@ -60,9 +136,19 @@ function confirmOrder(userId) {
     const checkout =
         checkoutService.getCheckout(userId);
 
-    // ======================================
-    // VALIDACIONES
-    // ======================================
+// ======================================
+// VALIDACIONES DE COMPRA
+//
+// Verifica:
+//
+// - Carrito con productos
+// - Checkout activo
+// - Tipo de entrega seleccionado
+// - Datos del cliente completos
+//
+// Si alguna validación falla,
+// el pedido no será creado.
+// ======================================
 
     if (!cart || cart.items.length === 0) {
 
@@ -106,9 +192,18 @@ function confirmOrder(userId) {
 
     }
 
-    // ======================================
-    // TOTALES
-    // ======================================
+// ======================================
+// CÁLCULO DE VALORES
+//
+// Obtiene:
+//
+// - Subtotal productos
+// - Valor domicilio
+// - Total final
+//
+// Estos valores quedan congelados
+// dentro del pedido.
+// ======================================
 
     const subtotal =
         cartService.getSubtotal(userId);
@@ -116,9 +211,21 @@ function confirmOrder(userId) {
     const total =
         checkoutService.getTotal(userId);
 
-    // ======================================
-    // CREAR SNAPSHOT DEL PEDIDO
-    // ======================================
+// ======================================
+// CONSTRUIR PEDIDO DEFINITIVO
+//
+// Se genera una copia completa del
+// pedido para almacenarla.
+//
+// Importante:
+//
+// El pedido NO depende posteriormente
+// del carrito ni del checkout.
+//
+// Aunque el cliente modifique el
+// carrito después, este pedido
+// permanecerá intacto.
+// ======================================
 
 const order = {
 
@@ -159,9 +266,18 @@ const order = {
     createdAt: Date.now()
 };
 
-    // ======================================
-    // GUARDAR PEDIDO
-    // ======================================
+// ======================================
+// REGISTRO Y NOTIFICACIÓN
+//
+// Acciones:
+//
+// 1. Guardar pedido en orders.json
+// 2. Notificar administrador
+// 3. Mostrar registro en consola
+//
+// Este es el punto donde el pedido
+// pasa a existir oficialmente.
+// ======================================
 
     orderStorage.saveOrder(
     order
@@ -178,7 +294,7 @@ if (
 ) {
 
     global.whatsappClient.sendText(
-        "11222867038253@lid",
+        "33286130770090@lid",
         adminNotification
     );
 
@@ -200,9 +316,17 @@ console.log(
     "====================\n"
 );
 
-    // ======================================
-    // LIMPIAR PROCESO TEMPORAL
-    // ======================================
+// ======================================
+// LIMPIEZA POSTERIOR A LA COMPRA
+//
+// Elimina:
+//
+// - Carrito temporal
+// - Checkout temporal
+//
+// Evita pedidos duplicados y permite
+// iniciar una nueva compra limpia.
+// ======================================
 
     cartService.clearCart(userId);
 
@@ -216,7 +340,15 @@ console.log(
 }
 
 // ==========================================
-// OBTENER PEDIDO
+// CONSULTAR PEDIDO POR NÚMERO
+//
+// Permite localizar un pedido específico.
+//
+// Ejemplo:
+//
+// 0001
+// 0025
+// 0148
 // ==========================================
 
 function getOrder(orderNumber) {
@@ -228,7 +360,10 @@ function getOrder(orderNumber) {
 }
 
 // ==========================================
-// OBTENER TODOS LOS PEDIDOS
+// CONSULTAR HISTORIAL COMPLETO
+//
+// Retorna todos los pedidos almacenados
+// en el sistema.
 // ==========================================
 
 function getOrders() {
@@ -238,7 +373,10 @@ function getOrders() {
 }
 
 // ==========================================
-// PEDIDOS DE UN CLIENTE
+// CONSULTAR PEDIDOS DE UN CLIENTE
+//
+// Permite obtener el historial de compras
+// realizadas por un usuario específico.
 // ==========================================
 
 function getOrdersByUser(userId) {
@@ -250,7 +388,10 @@ function getOrdersByUser(userId) {
 }
 
 // ==========================================
-// EXPORTAR
+// API PÚBLICA DEL SERVICIO
+//
+// Funciones disponibles para otros
+// módulos del sistema.
 // ==========================================
 
 module.exports = {

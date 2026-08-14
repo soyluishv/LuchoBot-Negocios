@@ -3,14 +3,57 @@
  * LuchoBot Negocios
  * Versión: 1.0.0
  * Archivo: orderStorage.js
+ * Módulo: Persistencia de Pedidos
+ *
+ * Descripción:
+ * Gestiona el almacenamiento físico
+ * de los pedidos en orders.json.
+ *
+ * Responsabilidades:
+ * - Crear archivo de pedidos
+ * - Leer pedidos almacenados
+ * - Guardar pedidos
+ * - Actualizar pedidos
+ * - Generar consecutivos
+ * - Consultar historial
+ *
+ * Tipo de almacenamiento:
+ * JSON local (sin base de datos)
+ *
+ * Archivo utilizado:
+ * data/orders/orders.json
+ *
+ * Futuras mejoras:
+ * - SQLite
+ * - MySQL
+ * - PostgreSQL
+ * - MongoDB
+ *
  * ==========================================
  */
+
+// ==========================================
+// DEPENDENCIAS DEL SISTEMA
+//
+// Módulos nativos de Node.js utilizados
+// para manejar archivos y directorios.
+// ==========================================
 
 const fs = require("fs");
 const path = require("path");
 
 // ==========================================
-// ARCHIVO DE PEDIDOS
+// RUTAS DE ALMACENAMIENTO
+//
+// Define la ubicación física donde
+// se guardan los pedidos del sistema.
+//
+// Estructura:
+//
+// data/
+// └── orders/
+//     └── orders.json
+//
 // ==========================================
 
 const storageDirectory = path.join(
@@ -24,7 +67,16 @@ const ordersFile = path.join(
 );
 
 // ==========================================
-// ASEGURAR ALMACENAMIENTO
+// INICIALIZAR ALMACENAMIENTO
+//
+// Verifica:
+//
+// 1. Que exista la carpeta orders
+// 2. Que exista orders.json
+//
+// Si no existen,
+// se crean automáticamente.
+//
 // ==========================================
 
 function ensureStorage() {
@@ -62,7 +114,21 @@ function ensureStorage() {
 }
 
 // ==========================================
-// LEER DATOS
+// LEER BASE DE DATOS JSON
+//
+// Obtiene toda la información almacenada
+// en orders.json.
+//
+// También valida la estructura para evitar
+// corrupción de datos.
+//
+// Retorna:
+//
+// {
+//   lastOrderNumber,
+//   orders
+// }
+//
 // ==========================================
 
 function readData() {
@@ -105,7 +171,14 @@ function readData() {
 }
 
 // ==========================================
-// GUARDAR DATOS
+// ESCRIBIR BASE DE DATOS JSON
+//
+// Guarda completamente la estructura
+// de pedidos en disco.
+//
+// Cada modificación del sistema termina
+// pasando por esta función.
+//
 // ==========================================
 
 function writeData(data) {
@@ -125,7 +198,20 @@ function writeData(data) {
 }
 
 // ==========================================
-// OBTENER SIGUIENTE NÚMERO
+// GENERAR CONSECUTIVO DE PEDIDO
+//
+// Incrementa el contador interno y genera
+// el siguiente número disponible.
+//
+// Ejemplos:
+//
+// 0001
+// 0002
+// 0003
+//
+// Garantiza que no existan números
+// repetidos.
+//
 // ==========================================
 
 function getNextOrderNumber() {
@@ -143,7 +229,19 @@ function getNextOrderNumber() {
 }
 
 // ==========================================
-// GUARDAR PEDIDO
+// REGISTRAR NUEVO PEDIDO
+// Propósito:
+// Guardar un pedido confirmado en el historial.
+//
+// Uso:
+// Se ejecuta cuando el cliente confirma
+// definitivamente una compra.
+//
+// Entrada:
+// order
+//
+// Salida:
+// Pedido guardado
 // ==========================================
 
 function saveOrder(order) {
@@ -159,7 +257,20 @@ function saveOrder(order) {
 }
 
 // ==========================================
-// BUSCAR PEDIDO
+// BUSCAR PEDIDO POR NÚMERO
+//
+// Permite localizar un pedido específico.
+//
+// Entrada:
+//
+// orderNumber
+//
+// Retorna:
+//
+// Pedido encontrado
+// o
+// null
+//
 // ==========================================
 
 function findOrder(orderNumber) {
@@ -174,7 +285,17 @@ function findOrder(orderNumber) {
 }
 
 // ==========================================
-// ACTUALIZAR PEDIDO
+// ACTUALIZAR INFORMACIÓN DE PEDIDO
+//
+// Permite modificar:
+//
+// - Estado
+// - Datos adicionales
+// - Fecha actualización
+//
+// Utilizado principalmente por
+// el panel administrativo.
+//
 // ==========================================
 
 function updateOrder(orderNumber, updatedFields) {
@@ -209,7 +330,11 @@ function updateOrder(orderNumber, updatedFields) {
 }
 
 // ==========================================
-// OBTENER TODOS
+// CONSULTAR HISTORIAL COMPLETO
+//
+// Devuelve todos los pedidos
+// almacenados en el sistema.
+//
 // ==========================================
 
 function getAllOrders() {
@@ -219,7 +344,18 @@ function getAllOrders() {
 }
 
 // ==========================================
-// PEDIDOS POR USUARIO
+// HISTORIAL DE CLIENTE
+//
+// Obtiene todos los pedidos asociados
+// a un usuario específico.
+//
+// Permite futuras funcionalidades:
+//
+// - Clientes frecuentes
+// - Fidelización
+// - Estadísticas
+// - Historial personal
+//
 // ==========================================
 
 function getOrdersByUser(userId) {
@@ -232,7 +368,11 @@ function getOrdersByUser(userId) {
 }
 
 // ==========================================
-// EXPORTAR
+// API PÚBLICA DEL ALMACENAMIENTO
+//
+// Funciones disponibles para lectura,
+// escritura y actualización de pedidos.
+//
 // ==========================================
 
 module.exports = {

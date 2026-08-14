@@ -1,3 +1,40 @@
+/**
+ * ==========================================
+ * LuchoBot Negocios
+ * Versión: 1.0.0
+ * Archivo: cartHandler.js
+ * Módulo: Gestión de Carrito
+ *
+ * Descripción:
+ * Controla las acciones disponibles
+ * cuando el cliente visualiza su carrito.
+ *
+ * Responsabilidades:
+ * - Seguir comprando
+ * - Modificar cantidades
+ * - Eliminar productos
+ * - Iniciar checkout
+ * - Cancelar pedido
+ *
+ * Importante:
+ * Este módulo NO guarda pedidos.
+ *
+ * Solo administra las decisiones
+ * tomadas desde la pantalla del carrito.
+ *
+ * ==========================================
+ */
+
+// ==========================================
+// DEPENDENCIAS DEL MÓDULO
+//
+// sessionStorage
+// Control de estados de conversación
+//
+// cartService
+// Gestión de productos del carrito
+//
+// ==========================================
 
 const sessionStorage = require(
     "../../storage/sessionStorage"
@@ -7,6 +44,33 @@ const cartService = require(
 "../../services/cart/cartService"
 );
 
+// ==========================================
+// CONTROLADOR PRINCIPAL DEL CARRITO
+//
+// Parámetros:
+//
+// userId
+// Identificador del cliente.
+//
+// text
+// Mensaje recibido desde WhatsApp.
+//
+// session
+// Estado actual de la conversación.
+//
+// buildCategoriesMenu
+// Función encargada de construir
+// el menú de categorías.
+//
+// Responsabilidad:
+//
+// Gestionar todas las acciones
+// disponibles cuando el usuario
+// se encuentra visualizando
+// el carrito de compras.
+//
+// ==========================================
+
 function handleCart(
     userId,
     text,
@@ -14,6 +78,15 @@ function handleCart(
     buildCategoriesMenu
 ) {
 
+// ==========================================
+// OPCIÓN 1
+// CONTINUAR COMPRANDO
+//
+// Regresa al listado de categorías
+// para agregar más productos.
+//
+// ==========================================
+    
     if (text === "1") {
 
         sessionStorage.updateSession(
@@ -26,6 +99,20 @@ function handleCart(
         return buildCategoriesMenu();
 
     }
+
+// ==========================================
+// OPCIÓN 2
+// MODIFICAR CANTIDADES
+//
+// Muestra los productos actuales
+// del carrito para seleccionar cuál
+// desea modificar.
+//
+// Estado siguiente:
+//
+// SELECTING_QUANTITY_PRODUCT
+//
+// ==========================================
 
 if (text === "2") {
 
@@ -52,6 +139,15 @@ if (text === "2") {
     let message =
         "🔢 *CAMBIAR CANTIDAD*\n\n";
 
+// ==========================================
+// CONSTRUIR LISTA DE PRODUCTOS
+//
+// Se enumeran los productos del carrito
+// para que el cliente seleccione cuál
+// desea modificar.
+//
+// ==========================================
+
     cart.items.forEach(
         (item, index) => {
 
@@ -69,6 +165,19 @@ message +=
     return message;
 
 }
+
+// ==========================================
+// OPCIÓN 3
+// ELIMINAR PRODUCTO
+//
+// Muestra los productos actuales
+// para seleccionar cuál será removido.
+//
+// Estado siguiente:
+//
+// REMOVING_PRODUCT
+//
+// ==========================================
 
 if (text === "3") 
     
@@ -99,6 +208,14 @@ if (text === "3")
 let message =
     "🗑️ *ELIMINAR PRODUCTO*\n\n";
 
+// ==========================================
+// LISTAR PRODUCTOS ELIMINABLES
+//
+// Se muestran todos los productos
+// actualmente almacenados en el carrito.
+//
+// ==========================================
+
 cart.items.forEach(
     (item, index) => {
 
@@ -117,6 +234,21 @@ return message;
 
 }
 
+// ==========================================
+// OPCIÓN 4
+// INICIAR CHECKOUT
+//
+// Permite seleccionar:
+//
+// 1. Domicilio
+// 2. Recoger en punto
+//
+// Estado siguiente:
+//
+// SELECTING_DELIVERY
+//
+// ==========================================
+
     if (text === "4") {
 
         sessionStorage.updateSession(
@@ -133,6 +265,18 @@ return message;
         );
 
     }
+
+// ==========================================
+// OPCIÓN 0
+// CANCELAR COMPRA
+//
+// Acciones:
+//
+// - Vaciar carrito
+// - Reiniciar sesión
+// - Regresar al menú principal
+//
+// ==========================================
 
 if (text === "0") {
 
@@ -168,9 +312,32 @@ if (text === "0") {
 
 }
 
+// ==========================================
+// OPCIÓN NO RECONOCIDA
+//
+// Se ejecuta cuando el usuario
+// envía una respuesta que no existe
+// dentro del menú actual.
+//
+// Ejemplos:
+//
+// 8
+// hola
+// abc
+//
+// ==========================================
+
     return "❌ Opción no válida.";
 
 }
+
+// ==========================================
+// API PÚBLICA DEL CARRITO
+//
+// Punto de entrada utilizado por el
+// flujo principal de conversación.
+//
+// ==========================================
 
 module.exports = {
     handleCart

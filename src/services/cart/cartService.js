@@ -3,21 +3,92 @@
  * LuchoBot Negocios
  * Versión: 1.0.0
  * Archivo: cartService.js
+ * Módulo: Carrito de Compras
+ *
+ * Descripción:
+ * Gestiona los productos seleccionados
+ * por cada cliente antes de confirmar
+ * un pedido.
+ *
+ * Responsabilidades:
+ * - Crear carritos
+ * - Agregar productos
+ * - Modificar cantidades
+ * - Eliminar productos
+ * - Calcular subtotal
+ * - Contar unidades
+ * - Vaciar carrito
+ *
+ * Tipo de almacenamiento:
+ * Memoria RAM (Map)
+ *
+ * Importante:
+ * Los carritos son temporales y se
+ * eliminan al confirmar o cancelar
+ * una compra.
+ *
+ * Adaptable para:
+ * - Restaurantes
+ * - Zapaterías
+ * - Tiendas de ropa
+ * - Cosméticos
+ * - Catálogos generales
+ *
  * ==========================================
  */
+
+// ==========================================
+// DEPENDENCIAS DEL SISTEMA
+//
+// Servicios utilizados para consultar
+// productos y categorías del catálogo.
+//
+// ==========================================
 
 const catalogService = require(
     "../catalog/catalogService"
 );
 
 // ==========================================
-// CARRITOS ACTIVOS
+// ALMACENAMIENTO TEMPORAL DE CARRITOS
+//
+// Estructura:
+//
+// Map<userId, cart>
+//
+// Cada usuario posee un carrito
+// independiente durante su compra.
+//
+// Los datos permanecen en memoria
+// hasta confirmar o cancelar.
+//
 // ==========================================
 
 const carts = new Map();
 
 // ==========================================
-// CREAR / OBTENER CARRITO
+// OBTENER O CREAR CARRITO
+//
+// Propósito:
+//
+// Recuperar el carrito activo del
+// cliente.
+//
+// Si no existe, se crea automáticamente.
+//
+// Entrada:
+//
+// userId
+//
+// Retorna:
+//
+// {
+//   userId,
+//   items,
+//   createdAt,
+//   updatedAt
+// }
+//
 // ==========================================
 
 function getCart(userId) {
@@ -38,7 +109,22 @@ function getCart(userId) {
 }
 
 // ==========================================
-// AGREGAR PRODUCTO
+// AGREGAR PRODUCTO AL CARRITO
+//
+// Flujo:
+//
+// 1. Validar producto
+// 2. Validar cantidad
+// 3. Buscar carrito
+// 4. Verificar si ya existe
+// 5. Agregar o acumular cantidad
+//
+// Si el producto ya existe,
+// aumenta la cantidad.
+//
+// Si no existe,
+// crea una nueva línea.
+//
 // ==========================================
 
 function addProduct(userId, productId, quantity = 1) {
@@ -79,6 +165,15 @@ function addProduct(userId, productId, quantity = 1) {
 
     } else {
 
+// ==========================================
+// CONSTRUIR ITEM DEL CARRITO
+//
+// Se almacena una copia básica del
+// producto para evitar depender del
+// catálogo posteriormente.
+//
+// ==========================================
+
 const category =
     catalogService.getCategoryById(
         product.categoryId
@@ -106,7 +201,16 @@ const category =
 }
 
 // ==========================================
-// CAMBIAR CANTIDAD
+// MODIFICAR CANTIDAD DE PRODUCTO
+//
+// Permite aumentar o disminuir la
+// cantidad de un producto existente.
+//
+// Regla:
+//
+// Si la cantidad es 0,
+// el producto será eliminado.
+//
 // ==========================================
 
 function setQuantity(userId, productId, quantity) {
@@ -159,7 +263,11 @@ function setQuantity(userId, productId, quantity) {
 }
 
 // ==========================================
-// ELIMINAR PRODUCTO
+// ELIMINAR PRODUCTO DEL CARRITO
+//
+// Remueve completamente un producto
+// seleccionado por el cliente.
+//
 // ==========================================
 
 function removeProduct(userId, productId) {
@@ -190,7 +298,19 @@ function removeProduct(userId, productId) {
 }
 
 // ==========================================
-// CALCULAR SUBTOTAL
+// CALCULAR SUBTOTAL DE COMPRA
+//
+// Suma:
+//
+// precio × cantidad
+//
+// de todos los productos del carrito.
+//
+// No incluye:
+//
+// - Domicilio
+// - Impuestos futuros
+//
 // ==========================================
 
 function getSubtotal(userId) {
@@ -207,7 +327,20 @@ function getSubtotal(userId) {
 }
 
 // ==========================================
-// TOTAL DE UNIDADES
+// CONTAR PRODUCTOS DEL CARRITO
+//
+// Calcula la cantidad total de
+// unidades agregadas por el cliente.
+//
+// Ejemplo:
+//
+// 2 Hamburguesas
+// 3 Gaseosas
+//
+// Resultado:
+//
+// 5 unidades
+//
 // ==========================================
 
 function getItemCount(userId) {
@@ -223,7 +356,13 @@ function getItemCount(userId) {
 }
 
 // ==========================================
-// ¿CARRITO VACÍO?
+// VERIFICAR CARRITO VACÍO
+//
+// Retorna:
+//
+// true  -> Sin productos
+// false -> Con productos
+//
 // ==========================================
 
 function isEmpty(userId) {
@@ -233,7 +372,16 @@ function isEmpty(userId) {
 }
 
 // ==========================================
-// VACIAR CARRITO
+// ELIMINAR CARRITO COMPLETO
+//
+// Utilizado cuando:
+//
+// - Se confirma un pedido
+// - Se cancela una compra
+//
+// Libera memoria y permite iniciar
+// una nueva compra.
+//
 // ==========================================
 
 function clearCart(userId) {
@@ -247,9 +395,12 @@ function clearCart(userId) {
 }
 
 // ==========================================
-// EXPORTAR
+// API PÚBLICA DEL CARRITO
+//
+// Funciones disponibles para que
+// otros módulos gestionen compras.
+//
 // ==========================================
-
 module.exports = {
 
     getCart,

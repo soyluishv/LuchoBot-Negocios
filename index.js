@@ -87,7 +87,7 @@ wppconnect.create({
             let response;
 
             if (
-                phone === "11222867038253"
+                phone === "33286130770090"
             ) {
 
                 console.log(

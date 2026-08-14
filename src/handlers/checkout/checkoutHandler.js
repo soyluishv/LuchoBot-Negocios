@@ -1,3 +1,70 @@
+/**
+ * ==========================================
+ * LuchoBot Negocios
+ * Versión: 1.0.0
+ * Archivo: checkoutHandler.js
+ * Módulo: Flujo de Compra
+ *
+ * Descripción:
+ * Controla paso a paso el proceso
+ * de checkout de un cliente.
+ *
+ * Responsabilidades:
+ * - Tipo de entrega
+ * - Captura de datos
+ * - Validaciones
+ * - Confirmación del pedido
+ * - Cancelación del pedido
+ * - Generación del resumen final
+ *
+ * Flujo:
+ *
+ * Menú
+ *   ↓
+ * Entrega
+ *   ↓
+ * Nombre
+ *   ↓
+ * Teléfono
+ *   ↓
+ * Dirección (si aplica)
+ *   ↓
+ * Barrio (si aplica)
+ *   ↓
+ * Observaciones
+ *   ↓
+ * Confirmación
+ *   ↓
+ * Pedido registrado
+ *
+ * Importante:
+ * Este archivo NO guarda pedidos.
+ *
+ * Solo coordina el flujo de compra.
+ *
+ * ==========================================
+ */
+
+// ==========================================
+// DEPENDENCIAS DEL FLUJO DE CHECKOUT
+//
+// orderService
+// Registro definitivo del pedido
+//
+// sessionStorage
+// Control de estados de conversación
+//
+// customerDataService
+// Datos del cliente
+//
+// checkoutService
+// Configuración de entrega y pago
+//
+// cartService
+// Productos seleccionados
+//
+// ==========================================
+
 const orderService = require(
     "../../services/order/orderService"
 );
@@ -17,15 +84,37 @@ const cartService = require(
     "../../services/cart/cartService"
 );
 
+// ==========================================
+// CONTROLADOR PRINCIPAL DE CHECKOUT
+//
+// Recibe:
+//
+// userId
+// text
+// session
+//
+// Evalúa el estado actual de compra
+// y decide cuál será el siguiente paso
+// de la conversación.
+//
+// ==========================================
+
 function handleCheckout(
     userId,
     text,
     session
 ) {
 
-    // ======================================
-    // SELECCIONAR ENTREGA
-    // ======================================
+// ==========================================
+// PASO 1
+// SELECCIÓN DEL TIPO DE ENTREGA
+//
+// Opciones:
+//
+// 1 = Domicilio
+// 2 = Recoger en punto
+//
+// ==========================================
 
     if (
         session.state ===
@@ -88,9 +177,13 @@ function handleCheckout(
 
     }
 
-    // ======================================
-    // PEDIR NOMBRE
-    // ======================================
+// ==========================================
+// PASO 2
+// CAPTURA DEL NOMBRE DEL CLIENTE
+//
+// Campo obligatorio.
+//
+// ==========================================
 
     if (
         session.state ===
@@ -114,9 +207,14 @@ function handleCheckout(
         );
 
     }
-// ======================================
-// PEDIR DIRECCIÓN
-// ======================================
+// ==========================================
+// PASO 4
+// CAPTURA DE DIRECCIÓN
+//
+// Solo aplica para pedidos
+// a domicilio.
+//
+// ==========================================
 
 if (
     session.state ===
@@ -141,9 +239,20 @@ if (
 
 }
 
-// ======================================
-// PEDIR TELÉFONO
-// ======================================
+// ==========================================
+// PASO 3
+// CAPTURA DEL TELÉFONO
+//
+// Validación:
+//
+// Debe iniciar en 3
+// Debe tener 10 dígitos
+//
+// Ejemplo:
+//
+// 3046578264
+//
+// ==========================================
 
 if (
     session.state ===
@@ -217,9 +326,13 @@ if (
 
 }
 
-    // ======================================
-    // PEDIR BARRIO
-    // ======================================
+// ==========================================
+// PASO 5
+// CAPTURA DE BARRIO O SECTOR
+//
+// Solo aplica para domicilio.
+//
+// ==========================================
 
 if (
     session.state ===
@@ -259,9 +372,25 @@ if (
 
 }
 
-// ======================================
-// PEDIR OBSERVACIONES
-// ======================================
+// ==========================================
+// PASO 6
+// OBSERVACIONES DEL PEDIDO
+//
+// Ejemplos:
+//
+// Sin cebolla
+// Sin tomate
+// Poco picante
+//
+// Si escribe:
+//
+// NO
+//
+// Se almacena:
+//
+// SIN OBSERVACIONES
+//
+// ==========================================
 
 if (
     session.state ===
@@ -351,9 +480,15 @@ if (
 
 }
 
-// ======================================
-// OBSERVACIONES RECOGER EN PUNTO
-// ======================================
+// ==========================================
+// PASO 6
+// OBSERVACIONES PARA RECOGIDA
+//
+// Flujo especial para clientes
+// que recogerán el pedido
+// directamente.
+//
+// ==========================================
 
 if (
     session.state ===
@@ -435,9 +570,17 @@ if (
 
 }
 
-// ======================================
-// CONFIRMAR PEDIDO
-// ======================================
+// ==========================================
+// PASO 7
+// CONFIRMACIÓN FINAL DEL PEDIDO
+//
+// Opciones:
+//
+// 1 = Registrar pedido
+// 2 = Modificar datos
+// 0 = Cancelar compra
+//
+// ==========================================
 
 if (
     session.state ===
@@ -447,6 +590,18 @@ if (
 {
 
     if (text === "1") {
+
+// ==========================================
+// CREAR PEDIDO DEFINITIVO
+//
+// A partir de este punto:
+//
+// - Se guarda en orders.json
+// - Se genera consecutivo
+// - Se notifica al administrador
+// - Se limpia el carrito
+//
+// ==========================================
 
         const result =
             orderService.confirmOrder(
@@ -468,6 +623,14 @@ if (
                 state: "MAIN_MENU"
             }
         );
+
+// ==========================================
+// GENERAR RESUMEN DE COMPRA
+//
+// Construye el detalle que verá
+// el cliente en WhatsApp.
+//
+// ==========================================
 
         let orderSummary =
             "🛒 Resumen del pedido\n\n";
@@ -558,6 +721,14 @@ notesText +
 
     }
 
+// ==========================================
+// GENERAR RESUMEN DE COMPRA
+//
+// Construye el detalle que verá
+// el cliente en WhatsApp.
+//
+// ==========================================
+
     if (text === "2") {
 
         sessionStorage.updateSession(
@@ -573,6 +744,17 @@ notesText +
         );
 
     }
+
+// ==========================================
+// CANCELAR COMPRA
+//
+// Acciones:
+//
+// - Cancelar checkout
+// - Vaciar carrito
+// - Regresar al menú principal
+//
+// ==========================================
 
 if (text === "0") {
 
@@ -607,6 +789,14 @@ if (text === "0") {
 return null;
 
 }
+
+// ==========================================
+// API PÚBLICA DEL CHECKOUT
+//
+// Punto de entrada utilizado por
+// el sistema de mensajes de WhatsApp.
+//
+// ==========================================
 
 module.exports = {
     handleCheckout

@@ -1,0 +1,39 @@
+Ejecuta---------- EN POWERSHELL---npm install   : Eso leerá tu package.json y descargará las dependencias necesarias, incluida: @wppconnect-team/wppconnect
+
+Después verifica EN POWERSHELL---npm list @wppconnect-team/wppconnect
+
+Debería mostrar la versión instalada.
+
+luego lo corre con: node index.js
+
+
+
+debo siempre borrar los pedidod de: data\orders\orders.json así:
+
+{
+  "lastOrderNumber": 0,
+  "orders": []
+}
+
+----------------------------------------------------------
+
+
+no puede quedar asi:   {
+ 			 "lastOrderNumber": 8,
+ 			 "orders": [
+   			 {
+    			  "orderNumber": "0001",
+     			 "userId": "11222867038253@lid",
+      			"status": "delivered",
+      			"items": [
+       			 {
+        		  "productId": "SAL003",
+       			   "categoryId": "salchipapas",
+        		  "categoryName": "Salchipapas",
+          		"emoji": "🍟",
+          		"name": "Personal con Tocineta",
+         		 "unitPrice": 19000,
+          		"quantity": 1,
+          		"total": 19000
+        		}
+     			 ]

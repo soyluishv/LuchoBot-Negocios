@@ -156,7 +156,24 @@ return menuText;
 }
 
 // ==========================================
-// PROCESAR MENSAJE CLIENTE
+// PROCESAR MENSAJE DEL CLIENTE
+//
+// Propósito:
+//
+// Recibir y procesar los mensajes enviados
+// por los clientes de WhatsApp.
+//
+// Protección:
+//
+// Algunos eventos de WhatsApp pueden llegar
+// sin contenido de texto. En ese caso,
+// el mensaje se ignora para evitar errores
+// como:
+//
+// TypeError:
+// Cannot read properties of undefined
+// (reading 'trim')
+//
 // ==========================================
 
 function processCustomerMessage(
@@ -168,6 +185,31 @@ function processCustomerMessage(
         sessionStorage.getSession(
             userId
         );
+
+    // ======================================
+    // VALIDAR MENSAJE RECIBIDO
+    //
+    // Si WhatsApp entrega un evento sin
+    // contenido de texto, no intentamos
+    // procesarlo.
+    //
+    // ======================================
+
+    if (
+        typeof message !== "string"
+    ) {
+
+        console.log(
+            "⚠️ Mensaje sin contenido de texto. Ignorado."
+        );
+
+        return null;
+
+    }
+
+    // ======================================
+    // LIMPIAR MENSAJE
+    // ======================================
 
     const text =
         message.trim();
