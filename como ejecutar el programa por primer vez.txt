@@ -37,3 +37,127 @@ no puede quedar asi:   {
           		"total": 19000
         		}
      			 ]
+
+
+
+
+
+
+
+
+
+
+
+Windows + R
+
+Escribe:
+
+notepad
+
+y pulsa Enter.
+
+Paso 2: Pegar esto dentro
+@echo off
+
+
+cd /d "C:\LuchoBot Negocios"
+
+
+node index.js
+
+
+pause
+Paso 3: Guardarlo
+
+En Bloc de Notas:
+
+Archivo → Guardar como
+
+Nombre:
+
+IniciarLuchoBot.bat
+
+Muy importante:
+
+Tipo: Todos los archivos (.)
+
+Guardar en:
+
+C:\LuchoBot Negocios
+
+Te debe quedar:
+
+C:\LuchoBot Negocios\IniciarLuchoBot.bat
+Paso 4: Probarlo
+
+Ve a:
+
+C:\LuchoBot Negocios
+
+y haz doble clic sobre:
+
+IniciarLuchoBot.bat
+
+Si todo está bien debería abrir una ventana negra y mostrar:
+
+🤖 LuchoBot Negocios
+🚀 Iniciando WhatsApp...
+✅ WhatsApp conectado
+
+Sin necesidad de abrir PowerShell ni escribir:
+
+node index.js
+Paso 5: Iniciarlo automáticamente al prender Windows
+
+Cuando confirmes que el .bat funciona, hacemos el segundo paso:
+
+Abrir carpeta Inicio de Windows.
+Crear acceso directo.
+Que LuchoBot arranque solo al encender el PC.
+
+Así nunca más tendrás que abrir PowerShell manualmente. 🚀🤖
+
+Primero prueba el .bat y dime si arranca correctamente.
+
+
+
+
+Paso 1: Ubicar la carpeta de Inicio de Windows
+
+Presiona:
+
+Windows + R
+
+Escribe:
+
+shell:startup
+
+Y pulsa Enter.
+
+Se abrirá una carpeta parecida a:
+
+C:\Users\TuUsuario\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+
+Todo lo que pongas ahí se ejecutará al iniciar sesión en Windows.
+
+Paso 2: Copiar tu archivo BAT
+
+Supongamos que creaste:
+
+C:\LuchoBot Negocios\Iniciar-LuchoBot.bat
+
+Copia ese archivo.
+
+Luego pégalo dentro de la carpeta que abrió:
+
+shell:startup
+Paso 3: Probar
+Guarda todo.
+Reinicia el PC.
+Inicia sesión normalmente.
+
+Debería abrirse automáticamente una ventana de PowerShell y ejecutar:
+
+node index.js
+
+sin que hagas nada.

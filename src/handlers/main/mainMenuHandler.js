@@ -30,6 +30,28 @@ function handleMainMenu(
 
     }
 
+    if (text === "9") {
+
+    if (
+        global.whatsappClient
+    ) {
+
+        global.whatsappClient.sendFile(
+            userId,
+            "./media/carta.pdf.pdf",
+            "Carta-Rapi-Crocks.pdf",
+            "📖 Carta Oficial Rapi Crock's\n\n😋 Revisa nuestros productos, fotos y promociones."
+        );
+
+    }
+
+    return (
+        "📖 Carta enviada.\n\n" +
+        "👇 Continúa navegando por el menú."
+    );
+
+}
+
 if (text === "2") {
 
     sessionStorage.updateSession(

@@ -98,6 +98,8 @@ categories.forEach(
 );
 
 menuText +=
+    "9️⃣ 📖 Ver Carta Oficial\n\n" +
+
     "━━━━━━━━━━━━━━\n\n" +
 
     "0️⃣ 🔙 Volver";

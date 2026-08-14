@@ -24,33 +24,67 @@ function handleCategories(
             }
         );
 
+        return (
+            "🔥🍔 *RAPI CROCK'S* 🍔🔥\n\n" +
+            "━━━━━━━━━━━━━━━━━━\n\n" +
+            "😋 *¡Bienvenido!*\n\n" +
+            "🌭 Perros Calientes\n" +
+            "🍔 Hamburguesas\n" +
+            "🍟 Papas\n" +
+            "🥤 Bebidas\n\n" +
+            "━━━━━━━━━━━━━━━━━━\n\n" +
+            "1️⃣ 🍔 Ver Menú\n\n" +
+            "2️⃣ 🛒 Ver Carrito\n\n" +
+            "3️⃣ ✅ Finalizar Pedido\n\n" +
+            "━━━━━━━━━━━━━━━━━━\n\n" +
+            "0️⃣ ❌ Cancelar\n\n" +
+            "👇 Responde con una opción"
+        );
+
+    }
+
+    if (
+        text === "9"
+    ) {
+
+        if (
+            global.whatsappClient
+        ) {
+
+            global.whatsappClient.sendFile(
+                userId,
+                "./media/carta.pdf",
+                "Carta-Rapi-Crocks.pdf",
+                "📖 Carta Oficial Rapi Crock's\n\n😋 Revisa nuestros productos, fotos y promociones."
+            );
+
+        }
+
 return (
-    "🔥🍔 *RAPI CROCK'S* 🍔🔥\n\n" +
+    "📖 Carta Oficial enviada correctamente.\n\n" +
 
-    "━━━━━━━━━━━━━━━━━━\n\n" +
+    "🔥 Ya viste nuestros productos, promociones y fotografías.\n\n" +
 
-    "😋 *¡Bienvenido!*\n\n" +
+    "📋 *MENÚ PRINCIPAL*\n\n" +
 
-    "🌭 Perros Calientes\n" +
-    "🍔 Hamburguesas\n" +
-    "🍟 Papas\n" +
-    "🥤 Bebidas\n\n" +
+    "1️⃣ 🍢 Chuzo de Pollo\n\n" +
+    "2️⃣ 🌭 Perros y Perras\n\n" +
+    "3️⃣ 🫓 Arepaburguer\n\n" +
+    "4️⃣ 🍗 Combos de Alas\n\n" +
+    "5️⃣ 🍟 Salchipapas\n\n" +
+    "6️⃣ 🍔 Hamburguesas\n\n" +
+    "7️⃣ ➕ Adiciones\n\n" +
+    "8️⃣ 🥤 Bebidas\n\n" +
+    "9️⃣ 📖 Ver Carta Oficial\n\n" +
 
-    "━━━━━━━━━━━━━━━━━━\n\n" +
+    "━━━━━━━━━━━━━━\n\n" +
 
-    "1️⃣ 🍔 Ver Menú\n\n" +
+    "0️⃣ 🔙 Volver\n\n" +
 
-    "2️⃣ 🛒 Ver Carrito\n\n" +
-
-    "3️⃣ ✅ Finalizar Pedido\n\n" +
-
-    "━━━━━━━━━━━━━━━━━━\n\n" +
-
-    "0️⃣ ❌ Cancelar\n\n" +
+    "🛒 Tu pedido se agregará automáticamente al carrito.\n\n" +
 
     "👇 Responde con una opción"
 );
-
     }
 
     const categories =

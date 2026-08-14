@@ -9,6 +9,9 @@ console.log(`
 
 console.log("🚀 Iniciando WhatsApp...");
 
+const BOT_START_TIME =
+    Math.floor(Date.now() / 1000);
+
 const wppconnect = require(
     "@wppconnect-team/wppconnect"
 );
@@ -46,18 +49,32 @@ wppconnect.create({
     client.onMessage(
         async (message) => {
 
-            if (
-               !message.from ||
-                message.isGroupMsg ||
-                message.from === "status@broadcast" ||
-                message.from.endsWith("@newsletter")
-            ) {
-                return;
-            }
+if (
+   !message.from ||
+    message.isGroupMsg ||
+    message.from === "status@broadcast" ||
+    message.from.endsWith("@newsletter")
+) {
+    return;
+}
 
-            console.log(
-                "===================="
-            );
+
+if (
+    message.timestamp &&
+    message.timestamp < BOT_START_TIME
+) {
+
+    console.log(
+        "⏭️ Mensaje antiguo ignorado"
+    );
+
+    return;
+
+}
+
+console.log(
+    "===================="
+);
 
             console.log(
                 "FROM:",
